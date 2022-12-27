@@ -1,0 +1,51 @@
+# MLSteam Model Archive Specification (v2022.1)
+
+A model archive encapsulates one or multiple models. It is a zip-compressed file with extension `.mlarchive`.
+
+## Internal directory structure
+
+```
+models/
+  └ model files
+hooks/
+  └ hook files
+manifest.json
+```
+
+## Models
+
+All model files should be saved under the `models` directory.
+
+## Hooks
+
+A hook is a specialized python script for certain tasks. All hook files should be saved under the `hooks` directory.
+
+Supported hooks:
+
+- **load.py**: A hook for loading the packaged model. It should contain a function `load(*args, **kwargs)` which loads a specified model and returns the model object. Pre-defined arguments:
+  - env: MLSteam environment variables
+- **predict.py**: A hook for making model prediction. It should contain a function `predict(*args, **kwargs)` which accepts model inputs and returns the prediction results. Pre-defined arguments:
+  - env: MLSteam environment variables
+  - model: the model object returned by `load()`
+  - inputs: model inputs
+
+MLSteam environment variables (which will be set by SDK):
+
+- **env['MLSTEAM_MODEL_DIR']**: The package's `models` directory.
+
+## Manifest
+
+All settings should be saved in the `manifest.json` file.
+
+Settings (optional fields could be `null` or without such an entry):
+
+- **models[].name** (*str*): A human-readable model name. It is independent of MLSteam server's model name.
+- **models[].version** (*str*): A human-readable model version. It is independent of MLSteam server's model version.
+- **models[].description** (*Optional[str]*): A human-readable model description.
+- **models[].framework** (*str*): The model's construction framework. It should be one of `"tensorflow"`, `"tensorflow.keras"`, `"pytorch"`, `"pytorch.lightning"`.
+- **models[].inputs** (*Optional[list]*): The model input specification.
+  - **models[].inputs[].name** (*str*): The input name.
+  - **models[].inputs[].type** (*str*): The input type with Python's type annotation.
+- **models[].outputs** (*Optional[list]*): The model output specification.
+  - **models[].outputs[].name** (*str*): The output name.
+  - **models[].outputs[].type** (*str*): The output type with Python's type annotation.

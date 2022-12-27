@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MLSteam Model SDK &mdash; MLSteam Model SDK 22.12.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SDK" href="../../sdk.html" />
+    <link rel="prev" title="TensorFlow Stock Prediction" href="../../model_developer/examples/tensorflow_stockpred.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> MLSteam Model SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../model_developer/index.html">Model Developer’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../model_developer/mlarchive_spec.html">MLSteam Model Archive Specification (v2022.1)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../model_developer/examples/index.html">Examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../model_developer/examples/tensorflow_stockpred.html">TensorFlow Stock Prediction</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">MLSteam Model SDK</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MLSteam Model SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../../model_developer/index.html">Model Developer’s Guide</a></li>
+          <li class="breadcrumb-item"><a href="../../model_developer/examples/index.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="../../model_developer/examples/tensorflow_stockpred.html">TensorFlow Stock Prediction</a></li>
+      <li class="breadcrumb-item active">MLSteam Model SDK</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/tensorflow_stockpred/use_sdk.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mlsteam-model-sdk">
+<h1>MLSteam Model SDK<a class="headerlink" href="#mlsteam-model-sdk" title="Permalink to this heading"></a></h1>
+<p>💡This example demonstrates how to use <em>MLSteam Model SDK</em> to download an encrypted model for prediction. It has been verified in an <em>MLSteam</em> lab running from a <code class="docutils literal notranslate"><span class="pre">ubuntu:20.04</span></code> image.</p>
+<section id="create-a-new-model-version">
+<h2>Create a new model version<a class="headerlink" href="#create-a-new-model-version" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Create a new <em>folder</em> (previously known as <em>dataset</em>) in <em>MLSteam</em>.</p></li>
+<li><p>Upload the <code class="docutils literal notranslate"><span class="pre">model.zip</span></code> file into folder and extract it.</p></li>
+<li><p>Create a new model named <code class="docutils literal notranslate"><span class="pre">stock</span></code> in <em>MLSteam</em>.</p></li>
+<li><p>Within the <code class="docutils literal notranslate"><span class="pre">stock</span></code> model, create a new <em>packaged</em> or <em>encrypted</em> version named <code class="docutils literal notranslate"><span class="pre">v1</span></code>.</p>
+<ul class="simple">
+<li><p>models: <code class="docutils literal notranslate"><span class="pre">models/</span></code> (<em>folder</em>)</p></li>
+<li><p>hooks: <code class="docutils literal notranslate"><span class="pre">hooks/</span></code> (<em>folder</em>)</p></li>
+<li><p>manifest: <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code></p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="install-required-sdk-packages">
+<h2>Install required SDK packages<a class="headerlink" href="#install-required-sdk-packages" title="Permalink to this heading"></a></h2>
+<p>If the last step of <em>install-themisdev</em> fails in <em>JupyterLab</em> or if you are not using <em>Ubuntu</em>, you may install the package according to the official <a class="reference external" href="https://docs.cossacklabs.com/themis/languages/python/installation/">instructions</a> instead.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%pip install -U pip
+%pip install -U setuptools
+%pip install -U mlsteam-model-sdk
+!mlsteam-model-cli install-themisdev -p ubuntu
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="install-required-model-packages">
+<h2>Install required model packages<a class="headerlink" href="#install-required-model-packages" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Replace the following <em>pip-requirements</em> path by the actual file location.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%pip install -U -r examples/tensorflow_stockpred/requirements.txt
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="initialize-sdk">
+<h2>Initialize SDK<a class="headerlink" href="#initialize-sdk" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Replace the value of <code class="docutils literal notranslate"><span class="pre">--default_project_val</span></code> by the actual project name (format: <code class="docutils literal notranslate"><span class="pre">PROJECT_OWNER_NAME/PROJECT_NAME</span></code>).</p></li>
+<li><p>Change <code class="docutils literal notranslate"><span class="pre">--default_model_val</span></code> also if you use another model name.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>!rm -rf ~/.mlsteam-model-sdk
+!mlsteam-model-cli init \
+    --default_project_type name \
+    --default_project_val &quot;admin/test&quot; \
+    --default_model_type name \
+    --default_model_val &quot;stock&quot;
+!cat ~/.mlsteam-model-sdk/cfg.ini
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from mlsteam_model_sdk.sdk.model import Model
+
+sdk_model = Model()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sdk_model.download_model_version(version_name=&#39;v1&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mv = sdk_model.load_model_version(version_name=&#39;v1&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>inputs = [50.0]*80
+outputs = mv.predict(inputs=inputs)
+print(outputs)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mv.models
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../model_developer/examples/tensorflow_stockpred.html" class="btn btn-neutral float-left" title="TensorFlow Stock Prediction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../sdk.html" class="btn btn-neutral float-right" title="SDK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, MyelinTek Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

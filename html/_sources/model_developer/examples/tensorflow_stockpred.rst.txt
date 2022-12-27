@@ -1,0 +1,14 @@
+TensorFlow Stock Prediction
+===========================
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Contents
+
+    /examples/tensorflow_stockpred/use_sdk
+
+Files:
+
+- `model.zip </_static/examples/tensorflow_stockpred/model.zip>`_
+- `requirements.txt </_static/examples/tensorflow_stockpred/requirements.txt>`_
+- `use_sdk.ipynb </_static/examples/tensorflow_stockpred/use_sdk.ipynb>`_

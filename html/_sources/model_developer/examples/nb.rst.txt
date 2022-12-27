@@ -1,0 +1,4 @@
+TensorFlow
+==========
+
+.. include:: /_static/examples/tensorflow_stockpred/use_sdk.ipynb

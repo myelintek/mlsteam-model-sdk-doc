@@ -1,0 +1,15 @@
+Model Developer's Guide
+=======================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents
+
+   mlarchive_spec
+   examples/index
+
+:doc:`mlarchive_spec`
+  specifies the model package's format. You don't need to package the model by yourself,
+  but the included files and directory structure should follow this spec.
+:doc:`examples/index`
+  demonstrate the SDK usage.
