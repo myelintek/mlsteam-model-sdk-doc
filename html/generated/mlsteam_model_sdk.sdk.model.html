@@ -388,6 +388,11 @@ the model and the model version should be given.</p>
 has been downloaded by <cite>download_model_version()</cite>.</p>
 <p>It suffices to specify only vuuid to determine the model version. Otherwise, both
 the model and the model version should be given.</p>
+<p>NOTE: When an encrypted model version packaged gets loaded twice, all previous loded
+hook modules for that package will be wiped out to avoid module loading errors.
+That is, all previous returned model version packages for that module are no longer
+usable. Make sure not to keep and use more than one model version package for a certain
+model version at the same time.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
