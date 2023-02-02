@@ -11,5 +11,7 @@ Model Developer's Guide
 :doc:`mlarchive_spec`
   specifies the model package's format. You don't need to package the model by yourself,
   but the included files and directory structure should follow this spec.
+`MLSteam Model Archive Specification (v2022.1) Manifest Schema </_static/mlarchive_manifest_schema_v1.json>`_
+  JSON schema for the model package's manifest format.
 :doc:`examples/index`
   demonstrate the SDK usage.

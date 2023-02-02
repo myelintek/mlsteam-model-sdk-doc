@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlsteam-model-sdk &mdash; MLSteam Model SDK 22.12.0 documentation</title>
+  <title>mlsteam-model-sdk &mdash; MLSteam Model SDK 0.4.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -44,10 +44,15 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">README</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#downloading-a-model-version-with-sdk">Downloading a model version with SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#importing-a-model-version-with-cli">Importing a model version with CLI</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="model_developer/index.html">Model Developer’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk.html">SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="release.html">Releases</a></li>
 </ul>
@@ -95,7 +100,8 @@ sudo mlsteam-model-cli install-themisdev
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
-<p>A minimum example for downloading a model version:</p>
+<section id="downloading-a-model-version-with-sdk">
+<h3>Downloading a model version with SDK<a class="headerlink" href="#downloading-a-model-version-with-sdk" title="Permalink to this heading"></a></h3>
 <blockquote>
 <div><p>This example assumes the program is running in an MLSteam system.
 If it is not the case, you may need to setup <em>API_TOKEN</em> with
@@ -130,6 +136,53 @@ If it is not the case, you may need to setup <em>API_TOKEN</em> with
 </pre></div>
 </div>
 </section>
+<section id="importing-a-model-version-with-cli">
+<h3>Importing a model version with CLI<a class="headerlink" href="#importing-a-model-version-with-cli" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><p>This example assumes the following files are locally available:</p>
+<ol class="arabic simple">
+<li><p>model version package (required)</p></li>
+<li><p>package encryption key (required only for encrypted packages)</p></li>
+</ol>
+</div></blockquote>
+<blockquote>
+<div><p>You will need administrator privileges to download or load encrypted model versions, as mentioned in the previous example.</p>
+</div></blockquote>
+<p>Initialize the SDK settings if you have not done so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlsteam-model-cli init
+</pre></div>
+</div>
+<blockquote>
+<div><p>By default, the settings will be at <code class="docutils literal notranslate"><span class="pre">$HOME/.mlsteam-model-sdk/cfg.ini</span></code>.</p>
+</div></blockquote>
+<p>To import a package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># for non-encrypted packages</span>
+mlsteam-model-cli mv import-local -f path/to/pkg/file
+
+<span class="c1"># for encrypted packages</span>
+mlsteam-model-cli mv import-local -f path/to/pkg/file -k path/to/enckey/file
+</pre></div>
+</div>
+<blockquote>
+<div><p>By default, the model and version names to register are read from the package manifest. You may customize these settings with the <code class="docutils literal notranslate"><span class="pre">--model_name</span></code> and <code class="docutils literal notranslate"><span class="pre">--version_name</span></code> options.</p>
+</div></blockquote>
+<blockquote>
+<div><p>If the operation is successful, you will find the imported pakage in local model registry:</p>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlsteam-model-cli mv list-local
+</pre></div>
+</div>
+</div></blockquote>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">muuid</span>     <span class="n">model_name</span>       <span class="n">vuuid</span>        <span class="n">version_name</span>     <span class="n">puuid</span>     <span class="n">packaged</span>   <span class="n">encrypted</span>      <span class="n">download_time</span>
+ <span class="o">================================================================================================================</span>
+ <span class="n">__local__</span>   <span class="o">...</span>          <span class="n">local</span><span class="o">-........</span>   <span class="o">...</span>            <span class="n">__local__</span>   <span class="mi">1</span>          <span class="o">...</span>            <span class="o">.....</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
 </section>
 
 
@@ -143,7 +196,7 @@ If it is not the case, you may need to setup <em>API_TOKEN</em> with
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, MyelinTek Inc..</p>
+    <p>&#169; Copyright 2023, MyelinTek Inc..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

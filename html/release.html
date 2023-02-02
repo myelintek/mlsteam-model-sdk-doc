@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Releases &mdash; MLSteam Model SDK 22.12.0 documentation</title>
+  <title>Releases &mdash; MLSteam Model SDK 0.4.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="mlsteam_model_sdk.sdk.model" href="generated/mlsteam_model_sdk.sdk.model.html" /> 
+    <link rel="prev" title="mlsteam_model_sdk.utils.config" href="generated/mlsteam_model_sdk.utils.config.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,8 +43,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="readme.html">README</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_developer/index.html">Model Developer’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk.html">SDK</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Releases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-3-0">v0.3.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-2-2">v0.2.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-2-1">v0.2.1</a></li>
@@ -80,6 +82,29 @@
              
   <section id="releases">
 <h1>Releases<a class="headerlink" href="#releases" title="Permalink to this heading"></a></h1>
+<section id="v0-4-0">
+<h2>v0.4.0<a class="headerlink" href="#v0-4-0" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Support 2-stage model version download.</p></li>
+<li><p>Support building binary wheels for Python 3.6+, manylinux2014_x86_64.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sdk.Model</span></code></p>
+<ul>
+<li><p>Add offline mode in constructor.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">Model.import_model_version()</span></code>.</p></li>
+</ul>
+</li>
+<li><p>core</p>
+<ul>
+<li><p>Isolate <em>registry</em> into an independent module.</p></li>
+</ul>
+</li>
+<li><p>utils</p>
+<ul>
+<li><p>Reimplement the <em>license</em> module with Cython.</p></li>
+</ul>
+</li>
+</ul>
+</section>
 <section id="v0-3-0">
 <h2>v0.3.0<a class="headerlink" href="#v0-3-0" title="Permalink to this heading"></a></h2>
 <ul class="simple">
@@ -134,13 +159,13 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="generated/mlsteam_model_sdk.sdk.model.html" class="btn btn-neutral float-left" title="mlsteam_model_sdk.sdk.model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/mlsteam_model_sdk.utils.config.html" class="btn btn-neutral float-left" title="mlsteam_model_sdk.utils.config" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, MyelinTek Inc..</p>
+    <p>&#169; Copyright 2023, MyelinTek Inc..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

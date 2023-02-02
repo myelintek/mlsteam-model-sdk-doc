@@ -6,7 +6,7 @@
 MLSteam Model SDK documentation
 ===============================
 
-Version: 0.3.0
+Version: 0.4.0
 
 .. toctree::
    :maxdepth: 2
@@ -14,6 +14,7 @@ Version: 0.3.0
 
    README <readme>
    model_developer/index
+   cli
    sdk
    release
 

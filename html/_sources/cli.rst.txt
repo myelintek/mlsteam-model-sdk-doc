@@ -1,0 +1,97 @@
+CLI
+===
+
+These are the provided commands for operators or developers.
+
+init
+----
+
+This sub-command initializes SDK settings::
+
+    Usage: mlsteam-model-cli init [OPTIONS]
+
+    initialize SDK settings
+
+    Options:
+    -i, --interactive               prompts the user for inputing fields not
+                                    providied yet with commandline options,
+                                    rather than silently setting them as empty
+    -d, --dir TEXT                  base directory to keep SDK settings
+                                    (default: user's home directory)
+    --api_token TEXT
+    --api_endpoint TEXT
+    --default_project_type [uuid|name]
+    --default_project_val TEXT
+    --default_model_type [uuid|name]
+    --default_model_val TEXT
+    --help                          Show this message and exit.
+
+
+install-themisdev
+-----------------
+
+This sub-command installs Themis encryption development package::
+
+    Usage: mlsteam-model-cli install-themisdev [OPTIONS]
+
+    install Themis encryption development package
+
+    Options:
+    -p, --platform [debian|ubuntu]  installation platform
+    --help                          Show this message and exit.
+
+
+mv
+---
+
+Model version operations.
+
+
+get-local
+~~~~~~~~~
+
+This sub-command gets local model version info::
+
+    Usage: mlsteam-model-cli mv get-local [OPTIONS]
+
+    get local model version info
+
+    Options:
+    --vuuid TEXT         version uuid
+    --version_name TEXT  version name
+    --muuid TEXT         model uuid
+    --model_name TEXT    model name
+    --help               Show this message and exit.
+
+
+import-local
+~~~~~~~~~~~~
+
+This sub-command imports a model version package::
+
+    Usage: mlsteam-model-cli mv import-local [OPTIONS]
+
+    import a model version package
+
+    Options:
+    -f, --pkg_file PATH     model version package file  [required]
+    -k, --enckey_file PATH  model version package encryption key file (required
+                            for encrypted packages)
+    --model_name TEXT       model name to register (a default value is used if
+                            not given)
+    --version_name TEXT     version name to register (a default value is used if
+                            not given)
+    --help                  Show this message and exit.
+
+
+list-local
+~~~~~~~~~~
+
+This sub-command lists local model versions::
+
+    Usage: mlsteam-model-cli mv list-local [OPTIONS]
+
+    list local model versions
+
+    Options:
+    --help  Show this message and exit.
