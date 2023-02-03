@@ -9,6 +9,6 @@ TensorFlow Stock Prediction
 
 Files:
 
-- `model.zip </_static/examples/tensorflow_stockpred/model.zip>`_
-- `requirements.txt </_static/examples/tensorflow_stockpred/requirements.txt>`_
-- `use_sdk.ipynb </_static/examples/tensorflow_stockpred/use_sdk.ipynb>`_
+- :download:`model.zip </examples/tensorflow_stockpred/model.zip>`
+- :download:`requirements.txt </examples/tensorflow_stockpred/requirements.txt>`
+- :download:`use_sdk.ipynb </examples/tensorflow_stockpred/use_sdk.ipynb>`
