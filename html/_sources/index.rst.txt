@@ -6,7 +6,7 @@
 MLSteam Model SDK documentation
 ===============================
 
-Version: 0.4.1
+Version: 0.4.2
 
 .. toctree::
    :maxdepth: 2
