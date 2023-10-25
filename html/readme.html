@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlsteam-model-sdk &mdash; MLSteam Model SDK 0.4.5 documentation</title>
+  <title>mlsteam-model-sdk &mdash; MLSteam Model SDK 0.5.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -30,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> MLSteam Model SDK
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MLSteam Model SDK
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -71,7 +75,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">mlsteam-model-sdk</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/readme.md.txt" rel="nofollow"> View page source</a>
@@ -87,15 +91,15 @@
 <p>SDK for accessing MLSteam models</p>
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install mlsteam-model-sdk
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>mlsteam-model-sdk
 </pre></div>
 </div>
 <p>To process encrypted model versions, install the <em>Themis development package</em> according to the official <a class="reference external" href="https://docs.cossacklabs.com/themis/languages/python/installation/">instrunctions</a>. Debian/Ubuntu users have a handy installation method:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># for users that already have administrator privileges</span>
-mlsteam-model-cli install-themisdev
+mlsteam-model-cli<span class="w"> </span>install-themisdev
 
 <span class="c1"># for those that need privilege lifting</span>
-sudo mlsteam-model-cli install-themisdev
+sudo<span class="w"> </span>mlsteam-model-cli<span class="w"> </span>install-themisdev
 </pre></div>
 </div>
 </section>
@@ -104,9 +108,9 @@ sudo mlsteam-model-cli install-themisdev
 <section id="initilize-sdk">
 <h3>Initilize SDK<a class="headerlink" href="#initilize-sdk" title="Permalink to this heading"></a></h3>
 <p>SDK needs to be initialized if you have not done so (replace the fields started with <em>$</em>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlsteam-model-cli init <span class="se">\</span>
-    --default_project_type<span class="o">=</span>name <span class="se">\</span>
-    --default_project_val<span class="o">=</span><span class="nv">$PROJECT_OWNER</span>/<span class="nv">$PROJECT_NAME</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlsteam-model-cli<span class="w"> </span>init<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--default_project_type<span class="o">=</span>name<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--default_project_val<span class="o">=</span><span class="nv">$PROJECT_OWNER</span>/<span class="nv">$PROJECT_NAME</span>
 </pre></div>
 </div>
 <blockquote>
@@ -114,10 +118,10 @@ sudo mlsteam-model-cli install-themisdev
 </div></blockquote>
 <p>If the program is running out of an MLSteam system, you may also need to setup <em>api_token</em>
 with this command instead, or by editing the <em>api_token</em> field in <code class="docutils literal notranslate"><span class="pre">cfg.ini</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlsteam-model-cli init <span class="se">\</span>
-    --api_token<span class="o">=</span><span class="nv">$YOUR_API_TOKEN</span> <span class="se">\</span>
-    --default_project_type<span class="o">=</span>name <span class="se">\</span>
-    --default_project_val<span class="o">=</span><span class="nv">$PROJECT_OWNER</span>/<span class="nv">$PROJECT_NAME</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlsteam-model-cli<span class="w"> </span>init<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--api_token<span class="o">=</span><span class="nv">$YOUR_API_TOKEN</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--default_project_type<span class="o">=</span>name<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--default_project_val<span class="o">=</span><span class="nv">$PROJECT_OWNER</span>/<span class="nv">$PROJECT_NAME</span>
 </pre></div>
 </div>
 </section>
@@ -158,10 +162,10 @@ Administrator privileges are not required when you only process non-encrypted mo
 </div></blockquote>
 <p>To import a package:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># for non-encrypted packages</span>
-mlsteam-model-cli mv import-local -f <span class="nv">$PACKAGE_FILE_PATH</span>
+mlsteam-model-cli<span class="w"> </span>mv<span class="w"> </span>import-local<span class="w"> </span>-f<span class="w"> </span><span class="nv">$PACKAGE_FILE_PATH</span>
 
 <span class="c1"># for encrypted packages</span>
-mlsteam-model-cli mv import-local -f <span class="nv">$PACKAGE_FILE_PATH</span> -k <span class="nv">$ENCKEY_FILE_PATH</span>
+mlsteam-model-cli<span class="w"> </span>mv<span class="w"> </span>import-local<span class="w"> </span>-f<span class="w"> </span><span class="nv">$PACKAGE_FILE_PATH</span><span class="w"> </span>-k<span class="w"> </span><span class="nv">$ENCKEY_FILE_PATH</span>
 </pre></div>
 </div>
 <blockquote>
@@ -171,7 +175,7 @@ mlsteam-model-cli mv import-local -f <span class="nv">$PACKAGE_FILE_PATH</span> 
 <div><p>If the operation is successful, you will find the imported pakage in local model registry:</p>
 </div></blockquote>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlsteam-model-cli mv list-local
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlsteam-model-cli<span class="w"> </span>mv<span class="w"> </span>list-local
 </pre></div>
 </div>
 </div></blockquote>

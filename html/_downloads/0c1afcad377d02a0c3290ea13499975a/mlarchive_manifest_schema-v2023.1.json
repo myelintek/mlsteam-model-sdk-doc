@@ -38,6 +38,19 @@
                         "items": {
                             "$ref": "#/$defs/io_item"
                         }
+                    },
+                    "enc_model_cleanup": {
+                        "enum": [
+                            "never",
+                            "after-load"
+                        ]
+                    },
+                    "enc_model_cleanup_files": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "pattern": "^[^/].*"
+                        }
                     }
                 },
                 "required": [

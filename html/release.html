@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Releases &mdash; MLSteam Model SDK 0.4.5 documentation</title>
+  <title>Releases &mdash; MLSteam Model SDK 0.5.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -29,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> MLSteam Model SDK
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MLSteam Model SDK
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -46,6 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sdk.html">SDK</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Releases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v0-5-0">v0.5.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-4-5">v0.4.5</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-4-4">v0.4.4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-4-2">v0.4.2</a></li>
@@ -73,7 +78,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Releases</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/release.md.txt" rel="nofollow"> View page source</a>
@@ -86,6 +91,26 @@
              
   <section id="releases">
 <h1>Releases<a class="headerlink" href="#releases" title="Permalink to this heading"></a></h1>
+<section id="v0-5-0">
+<h2>v0.5.0<a class="headerlink" href="#v0-5-0" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>core</p>
+<ul>
+<li><p>Fix SDK initialization error when project name, model name, or model version name is given under offline mode.</p></li>
+<li><p>Add a method for deleting model version(s) from local registry: <code class="docutils literal notranslate"><span class="pre">Model.delete_model_version()</span></code>.</p></li>
+<li><p>Add a method for deleting all versions of a model from local registry: <code class="docutils literal notranslate"><span class="pre">Model.delete_model()</span></code>.</p></li>
+<li><p>Support cleaning up model files for encrypted model version during model active time.</p></li>
+</ul>
+</li>
+<li><p>CLI</p>
+<ul>
+<li><p>Add a command for deleting model versions(s) from local registry: <code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">del-local</span></code>.</p></li>
+<li><p>Add a command for deleting all versions of a model from local registry: <code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">del-all-local</span></code>.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">--default_enc_model_cleanup</span></code> in initializing SDK config.</p></li>
+</ul>
+</li>
+</ul>
+</section>
 <section id="v0-4-5">
 <h2>v0.4.5<a class="headerlink" href="#v0-4-5" title="Permalink to this heading"></a></h2>
 <ul class="simple">

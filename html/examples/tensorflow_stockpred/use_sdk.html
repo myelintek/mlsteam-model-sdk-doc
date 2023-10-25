@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MLSteam Model SDK &mdash; MLSteam Model SDK 0.4.5 documentation</title>
+  <title>MLSteam Model SDK &mdash; MLSteam Model SDK 0.5.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -30,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> MLSteam Model SDK
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            MLSteam Model SDK
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -44,7 +48,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../model_developer/index.html">Model Developer’s Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../model_developer/mlarchive_spec.html">MLSteam Model Archive Specification (v2022.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model_developer/mlarchive_spec.html">MLSteam Model Archive Specification (v2023.1)</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../model_developer/examples/index.html">Examples</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../../model_developer/examples/tensorflow_stockpred.html">TensorFlow Stock Prediction</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">MLSteam Model SDK</a></li>
@@ -72,7 +76,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../model_developer/index.html">Model Developer’s Guide</a></li>
           <li class="breadcrumb-item"><a href="../../model_developer/examples/index.html">Examples</a></li>
           <li class="breadcrumb-item"><a href="../../model_developer/examples/tensorflow_stockpred.html">TensorFlow Stock Prediction</a></li>
@@ -109,10 +113,10 @@
 <p>If the last step of <em>install-themisdev</em> fails in <em>JupyterLab</em> or if you are not using <em>Ubuntu</em>, you may install the package according to the official <a class="reference external" href="https://docs.cossacklabs.com/themis/languages/python/installation/">instructions</a> instead.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%pip install -U pip
-%pip install -U setuptools
-%pip install -U mlsteam-model-sdk
-!mlsteam-model-cli install-themisdev -p ubuntu
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install -U pip
+<span class="o">%</span><span class="k">pip</span> install -U setuptools
+<span class="o">%</span><span class="k">pip</span> install -U mlsteam-model-sdk
+<span class="o">!</span>mlsteam-model-cli<span class="w"> </span>install-themisdev<span class="w"> </span>-p<span class="w"> </span>ubuntu
 </pre></div>
 </div>
 </div>
@@ -125,7 +129,7 @@
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%pip install -U -r examples/tensorflow_stockpred/requirements.txt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install -U -r examples/tensorflow_stockpred/requirements.txt
 </pre></div>
 </div>
 </div>
@@ -152,39 +156,39 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from mlsteam_model_sdk.sdk.model import Model
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlsteam_model_sdk.sdk.model</span> <span class="kn">import</span> <span class="n">Model</span>
 
-sdk_model = Model()
+<span class="n">sdk_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sdk_model.download_model_version(version_name=&#39;v1&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sdk_model</span><span class="o">.</span><span class="n">download_model_version</span><span class="p">(</span><span class="n">version_name</span><span class="o">=</span><span class="s1">&#39;v1&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mv = sdk_model.load_model_version(version_name=&#39;v1&#39;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mv</span> <span class="o">=</span> <span class="n">sdk_model</span><span class="o">.</span><span class="n">load_model_version</span><span class="p">(</span><span class="n">version_name</span><span class="o">=</span><span class="s1">&#39;v1&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>inputs = [50.0]*80
-outputs = mv.predict(inputs=inputs)
-print(outputs)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">50.0</span><span class="p">]</span><span class="o">*</span><span class="mi">80</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">mv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mv.models
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mv</span><span class="o">.</span><span class="n">models</span>
 </pre></div>
 </div>
 </div>

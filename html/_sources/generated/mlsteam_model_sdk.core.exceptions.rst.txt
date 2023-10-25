@@ -30,6 +30,7 @@
       MissingApiTokenException
       MissingConfigException
       ModelVersionNotFoundException
+      MultipleModelVersionsException
    
    
 

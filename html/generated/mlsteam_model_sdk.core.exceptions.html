@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlsteam_model_sdk.core.exceptions &mdash; MLSteam Model SDK 0.4.5 documentation</title>
+  <title>mlsteam_model_sdk.core.exceptions &mdash; MLSteam Model SDK 0.5.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -30,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> MLSteam Model SDK
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MLSteam Model SDK
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -80,6 +84,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.core.exceptions.ModelVersionNotFoundException.__init__"><code class="docutils literal notranslate"><span class="pre">ModelVersionNotFoundException.__init__()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#mlsteam_model_sdk.core.exceptions.MultipleModelVersionsException"><code class="docutils literal notranslate"><span class="pre">MultipleModelVersionsException</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.core.exceptions.MultipleModelVersionsException.__init__"><code class="docutils literal notranslate"><span class="pre">MultipleModelVersionsException.__init__()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.core.registry.html">mlsteam_model_sdk.core.registry</a></li>
@@ -103,7 +111,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../sdk.html">SDK</a></li>
       <li class="breadcrumb-item active">mlsteam_model_sdk.core.exceptions</li>
       <li class="wy-breadcrumbs-aside">
@@ -120,10 +128,6 @@
 <p>Exception definitions</p>
 <p class="rubric">Exceptions</p>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mlsteam_model_sdk.core.exceptions.InvalidApiTokenException" title="mlsteam_model_sdk.core.exceptions.InvalidApiTokenException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InvalidApiTokenException</span></code></a>()</p></td>
 <td><p></p></td>
@@ -150,6 +154,9 @@
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mlsteam_model_sdk.core.exceptions.ModelVersionNotFoundException" title="mlsteam_model_sdk.core.exceptions.ModelVersionNotFoundException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ModelVersionNotFoundException</span></code></a>([muuid, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mlsteam_model_sdk.core.exceptions.MultipleModelVersionsException" title="mlsteam_model_sdk.core.exceptions.MultipleModelVersionsException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultipleModelVersionsException</span></code></a>([muuid, ...])</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -244,6 +251,17 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="mlsteam_model_sdk.core.exceptions.ModelVersionNotFoundException.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">muuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.core.exceptions.ModelVersionNotFoundException.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.core.exceptions.MultipleModelVersionsException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlsteam_model_sdk.core.exceptions.</span></span><span class="sig-name descname"><span class="pre">MultipleModelVersionsException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">muuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.core.exceptions.MultipleModelVersionsException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlsteam_model_sdk.core.exceptions.MLSteamException" title="mlsteam_model_sdk.core.exceptions.MLSteamException"><code class="xref py py-class docutils literal notranslate"><span class="pre">MLSteamException</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.core.exceptions.MultipleModelVersionsException.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">muuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.core.exceptions.MultipleModelVersionsException.__init__" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>

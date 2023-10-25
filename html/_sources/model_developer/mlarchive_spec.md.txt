@@ -1,4 +1,4 @@
-# MLSteam Model Archive Specification (v2022.1)
+# MLSteam Model Archive Specification (v2023.1)
 
 A model archive encapsulates one or multiple models. It is a zip-compressed file with extension `.mlarchive`.
 
@@ -42,10 +42,12 @@ Settings (optional fields could be `null` or without such an entry):
 - **models[].name** (*str*): A human-readable model name. It is independent of MLSteam server's model name.
 - **models[].version** (*str*): A human-readable model version. It is independent of MLSteam server's model version.
 - **models[].description** (*Optional[str]*): A human-readable model description.
-- **models[].framework** (*str*): The model's construction framework. It should be one of `"tensorflow"`, `"tensorflow.keras"`, `"pytorch"`, `"pytorch.lightning"`.
+- **models[].framework** (*str*): The model's construction framework. It should be one of `tensorflow`, `tensorflow.keras`, `pytorch`, or `pytorch.lightning`.
 - **models[].inputs** (*Optional[list]*): The model input specification.
   - **models[].inputs[].name** (*str*): The input name.
   - **models[].inputs[].type** (*str*): The input type with Python's type annotation.
 - **models[].outputs** (*Optional[list]*): The model output specification.
   - **models[].outputs[].name** (*str*): The output name.
   - **models[].outputs[].type** (*str*): The output type with Python's type annotation.
+- **models[].enc_model_cleanup** (*Optional[str]*): The model file cleanup policy. This setting is only effective for encrypted model packages to decide the time to cleanup files during model's active time. It should be one of `never` or `after-load`. It is a good practice to enhance model protection by setting this to `after-load` if the files to cleanup are not referenced after the model has been loaded.
+- **models[].enc_model_cleanup_files[]** (*Optional[list]*): A list of path patterns to delete the model files at cleanup. This setting is only effective for encrypted model packages and when the cleanup policy is not `never`. A pattern is represented as a [Python's glob](https://docs.python.org/3/library/glob.html) pattern relative to the model package's root directory and should never go beyond that root directory. The files will be deleted according to the order of patterns in the list. By default, it is a single pattern for the `models` directory (that is, `["models"]`).

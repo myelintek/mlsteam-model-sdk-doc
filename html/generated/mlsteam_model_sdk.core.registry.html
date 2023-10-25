@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlsteam_model_sdk.core.registry &mdash; MLSteam Model SDK 0.4.5 documentation</title>
+  <title>mlsteam_model_sdk.core.registry &mdash; MLSteam Model SDK 0.5.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -30,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> MLSteam Model SDK
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MLSteam Model SDK
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -52,6 +56,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.core.registry.Registry.LOCAL_MUUID"><code class="docutils literal notranslate"><span class="pre">Registry.LOCAL_MUUID</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.core.registry.Registry.LOCAL_PUUID"><code class="docutils literal notranslate"><span class="pre">Registry.LOCAL_PUUID</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.core.registry.Registry.__init__"><code class="docutils literal notranslate"><span class="pre">Registry.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.core.registry.Registry.delete_model"><code class="docutils literal notranslate"><span class="pre">Registry.delete_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.core.registry.Registry.delete_model_version"><code class="docutils literal notranslate"><span class="pre">Registry.delete_model_version()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.core.registry.Registry.get_download_base_dir"><code class="docutils literal notranslate"><span class="pre">Registry.get_download_base_dir()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.core.registry.Registry.get_download_file"><code class="docutils literal notranslate"><span class="pre">Registry.get_download_file()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.core.registry.Registry.get_extract_base_dir"><code class="docutils literal notranslate"><span class="pre">Registry.get_extract_base_dir()</span></code></a></li>
@@ -84,7 +90,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../sdk.html">SDK</a></li>
       <li class="breadcrumb-item active">mlsteam_model_sdk.core.registry</li>
       <li class="wy-breadcrumbs-aside">
@@ -101,10 +107,6 @@
 <p>Local model registry</p>
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mlsteam_model_sdk.core.registry.Registry" title="mlsteam_model_sdk.core.registry.Registry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Registry</span></code></a>(config_dir)</p></td>
 <td><p>Local model registry operator</p></td>
@@ -131,8 +133,50 @@
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.core.registry.Registry.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>Initializes a local model registry operator.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>config_dir</strong> – SDK configuration base directory</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.core.registry.Registry.delete_model">
+<span class="sig-name descname"><span class="pre">delete_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">muuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_muuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.core.registry.Registry.delete_model" title="Permalink to this definition"></a></dt>
+<dd><p>Deletes all model versions of a model from local registry.</p>
+<p>A model is specified by <cite>muuid</cite>, <cite>model_name</cite>, or <cite>default_muuid</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>muuid</strong> – model uuid</p></li>
+<li><p><strong>model_name</strong> – model name</p></li>
+<li><p><strong>default_muuid</strong> – default model uuid</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.core.registry.Registry.delete_model_version">
+<span class="sig-name descname"><span class="pre">delete_model_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vuuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">muuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_muuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete_all</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.core.registry.Registry.delete_model_version" title="Permalink to this definition"></a></dt>
+<dd><p>Deletes one or multiple model versions from local registry.</p>
+<p>A model version is specified in one of the following ways:
+- model version uuid (<cite>vuuid</cite>) alone
+- model (<cite>muuid</cite>, <cite>model_name</cite>, or <cite>default_muuid</cite>) combined with version (<cite>version_name</cite>)</p>
+<p>When <cite>vuuid</cite> is given, it will attempt to delete the associated files
+even when the local registry is broken.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vuuid</strong> – model version uuid</p></li>
+<li><p><strong>version_name</strong> – version name</p></li>
+<li><p><strong>muuid</strong> – model uuid</p></li>
+<li><p><strong>model_name</strong> – model name</p></li>
+<li><p><strong>default_muuid</strong> – default model uuid</p></li>
+<li><p><strong>delete_all</strong> – delete all matching model versions</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="mlsteam_model_sdk.core.exceptions.html#mlsteam_model_sdk.core.exceptions.MultipleModelVersionsException" title="mlsteam_model_sdk.core.exceptions.MultipleModelVersionsException"><strong>MultipleModelVersionsException</strong></a> – there are multiple matching model versions and <cite>delete_all</cite> is not set</p>
 </dd>
 </dl>
 </dd></dl>
@@ -167,9 +211,12 @@
 <dd><p>Gets information of a model version in local registry.</p>
 <p>A model version is specified in one of the following ways:
 - model version uuid (<cite>vuuid</cite>) alone
-- model (<cite>muuid</cite>, or <cite>model_name</cite>) combined with version (<cite>version_name</cite>, or <cite>default_muuid</cite>)</p>
+- model (<cite>muuid</cite>, <cite>model_name</cite>, or <cite>default_muuid</cite>) combined with version (<cite>version_name</cite>)</p>
+<p>It returns the first matching model version.
+To get all matching model versions, call <cite>list_model_versions()</cite> instead.
+(It is possible to have multiple matches when a model version is specified by model name and version name.)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>vuuid</strong> – model version uuid</p></li>
 <li><p><strong>version_name</strong> – version name</p></li>
@@ -178,7 +225,7 @@
 <li><p><strong>default_muuid</strong> – default model uuid</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>model version info dict, or <cite>None</cite> when the model version is not found</p>
 </dd>
 </dl>
@@ -196,7 +243,7 @@
 <span class="sig-name descname"><span class="pre">list_model_versions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mlsteam_model_sdk.core.registry.Registry.list_model_versions" title="Permalink to this definition"></a></dt>
 <dd><p>Gets information of model versions in local registry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>model version dict [vuuid =&gt; model version info dict]</p>
 </dd>
 </dl>

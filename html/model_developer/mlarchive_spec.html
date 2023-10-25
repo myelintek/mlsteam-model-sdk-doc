@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MLSteam Model Archive Specification (v2022.1) &mdash; MLSteam Model SDK 0.4.5 documentation</title>
+  <title>MLSteam Model Archive Specification (v2023.1) &mdash; MLSteam Model SDK 0.5.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -30,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> MLSteam Model SDK
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MLSteam Model SDK
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -44,7 +48,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">README</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Model Developer’s Guide</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">MLSteam Model Archive Specification (v2022.1)</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MLSteam Model Archive Specification (v2023.1)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#internal-directory-structure">Internal directory structure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#models">Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#hooks">Hooks</a></li>
@@ -72,9 +76,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Model Developer’s Guide</a></li>
-      <li class="breadcrumb-item active">MLSteam Model Archive Specification (v2022.1)</li>
+      <li class="breadcrumb-item active">MLSteam Model Archive Specification (v2023.1)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/model_developer/mlarchive_spec.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -84,8 +88,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="mlsteam-model-archive-specification-v2022-1">
-<h1>MLSteam Model Archive Specification (v2022.1)<a class="headerlink" href="#mlsteam-model-archive-specification-v2022-1" title="Permalink to this heading"></a></h1>
+  <section id="mlsteam-model-archive-specification-v2023-1">
+<h1>MLSteam Model Archive Specification (v2023.1)<a class="headerlink" href="#mlsteam-model-archive-specification-v2023-1" title="Permalink to this heading"></a></h1>
 <p>A model archive encapsulates one or multiple models. It is a zip-compressed file with extension <code class="docutils literal notranslate"><span class="pre">.mlarchive</span></code>.</p>
 <section id="internal-directory-structure">
 <h2>Internal directory structure<a class="headerlink" href="#internal-directory-structure" title="Permalink to this heading"></a></h2>
@@ -132,7 +136,7 @@ manifest.json
 <li><p><strong>models[].name</strong> (<em>str</em>): A human-readable model name. It is independent of MLSteam server’s model name.</p></li>
 <li><p><strong>models[].version</strong> (<em>str</em>): A human-readable model version. It is independent of MLSteam server’s model version.</p></li>
 <li><p><strong>models[].description</strong> (<em>Optional[str]</em>): A human-readable model description.</p></li>
-<li><p><strong>models[].framework</strong> (<em>str</em>): The model’s construction framework. It should be one of <code class="docutils literal notranslate"><span class="pre">&quot;tensorflow&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;tensorflow.keras&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;pytorch&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;pytorch.lightning&quot;</span></code>.</p></li>
+<li><p><strong>models[].framework</strong> (<em>str</em>): The model’s construction framework. It should be one of <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>, <code class="docutils literal notranslate"><span class="pre">tensorflow.keras</span></code>, <code class="docutils literal notranslate"><span class="pre">pytorch</span></code>, or <code class="docutils literal notranslate"><span class="pre">pytorch.lightning</span></code>.</p></li>
 <li><p><strong>models[].inputs</strong> (<em>Optional[list]</em>): The model input specification.</p>
 <ul>
 <li><p><strong>models[].inputs[].name</strong> (<em>str</em>): The input name.</p></li>
@@ -145,6 +149,8 @@ manifest.json
 <li><p><strong>models[].outputs[].type</strong> (<em>str</em>): The output type with Python’s type annotation.</p></li>
 </ul>
 </li>
+<li><p><strong>models[].enc_model_cleanup</strong> (<em>Optional[str]</em>): The model file cleanup policy. This setting is only effective for encrypted model packages to decide the time to cleanup files during model’s active time. It should be one of <code class="docutils literal notranslate"><span class="pre">never</span></code> or <code class="docutils literal notranslate"><span class="pre">after-load</span></code>. It is a good practice to enhance model protection by setting this to <code class="docutils literal notranslate"><span class="pre">after-load</span></code> if the files to cleanup are not referenced after the model has been loaded.</p></li>
+<li><p><strong>models[].enc_model_cleanup_files[]</strong> (<em>Optional[list]</em>): A list of path patterns to delete the model files at cleanup. This setting is only effective for encrypted model packages and when the cleanup policy is not <code class="docutils literal notranslate"><span class="pre">never</span></code>. A pattern is represented as a <a class="reference external" href="https://docs.python.org/3/library/glob.html">Python’s glob</a> pattern relative to the model package’s root directory and should never go beyond that root directory. The files will be deleted according to the order of patterns in the list. By default, it is a single pattern for the <code class="docutils literal notranslate"><span class="pre">models</span></code> directory (that is, <code class="docutils literal notranslate"><span class="pre">[&quot;models&quot;]</span></code>).</p></li>
 </ul>
 </section>
 </section>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CLI &mdash; MLSteam Model SDK 0.4.5 documentation</title>
+  <title>CLI &mdash; MLSteam Model SDK 0.5.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -30,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> MLSteam Model SDK
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MLSteam Model SDK
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -51,6 +55,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#get-local">get-local</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#import-local">import-local</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#list-local">list-local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#del-local">del-local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#del-all-local">del-all-local</a></li>
 </ul>
 </li>
 </ul>
@@ -72,7 +78,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">CLI</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/cli.rst.txt" rel="nofollow"> View page source</a>
@@ -105,6 +111,9 @@
 <span class="o">--</span><span class="n">default_project_val</span> <span class="n">TEXT</span>
 <span class="o">--</span><span class="n">default_model_type</span> <span class="p">[</span><span class="n">uuid</span><span class="o">|</span><span class="n">name</span><span class="p">]</span>
 <span class="o">--</span><span class="n">default_model_val</span> <span class="n">TEXT</span>
+<span class="o">--</span><span class="n">default_enc_model_cleanup</span> <span class="p">[</span><span class="n">never</span><span class="o">|</span><span class="n">after</span><span class="o">-</span><span class="n">load</span><span class="p">]</span>
+                                <span class="n">default</span> <span class="n">model</span> <span class="n">file</span> <span class="n">cleanup</span> <span class="n">policy</span> <span class="k">for</span>
+                                <span class="n">encrypted</span> <span class="n">models</span> <span class="n">during</span> <span class="n">model</span><span class="s1">&#39;s active time</span>
 <span class="o">--</span><span class="n">help</span>                          <span class="n">Show</span> <span class="n">this</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span><span class="o">.</span>
 </pre></div>
 </div>
@@ -169,6 +178,40 @@
 
 <span class="n">Options</span><span class="p">:</span>
 <span class="o">--</span><span class="n">help</span>  <span class="n">Show</span> <span class="n">this</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="del-local">
+<h3>del-local<a class="headerlink" href="#del-local" title="Permalink to this heading"></a></h3>
+<p>This sub-command deletes a model version package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Usage</span><span class="p">:</span> <span class="n">mlsteam</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">cli</span> <span class="n">mv</span> <span class="k">del</span><span class="o">-</span><span class="n">local</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span>
+
+  <span class="n">delete</span> <span class="n">a</span> <span class="n">model</span> <span class="n">version</span> <span class="n">package</span>
+
+<span class="n">Options</span><span class="p">:</span>
+  <span class="o">--</span><span class="n">vuuid</span> <span class="n">TEXT</span>         <span class="n">version</span> <span class="n">uuid</span>
+  <span class="o">--</span><span class="n">version_name</span> <span class="n">TEXT</span>  <span class="n">version</span> <span class="n">name</span>
+  <span class="o">--</span><span class="n">muuid</span> <span class="n">TEXT</span>         <span class="n">model</span> <span class="n">uuid</span>
+  <span class="o">--</span><span class="n">model_name</span> <span class="n">TEXT</span>    <span class="n">model</span> <span class="n">name</span>
+  <span class="o">--</span><span class="n">del_all</span>            <span class="n">delete</span> <span class="nb">all</span> <span class="n">matching</span> <span class="n">model</span> <span class="n">versions</span><span class="p">;</span> <span class="n">by</span> <span class="n">default</span><span class="p">,</span> <span class="n">it</span>
+                       <span class="n">reports</span> <span class="n">an</span> <span class="n">error</span> <span class="n">when</span> <span class="n">multiple</span> <span class="n">matching</span> <span class="n">model</span> <span class="n">versions</span>
+                       <span class="n">are</span> <span class="n">found</span>
+  <span class="o">--</span><span class="n">help</span>               <span class="n">Show</span> <span class="n">this</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="del-all-local">
+<h3>del-all-local<a class="headerlink" href="#del-all-local" title="Permalink to this heading"></a></h3>
+<p>This sub-command deletes all model version packages of a model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Usage</span><span class="p">:</span> <span class="n">mlsteam</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">cli</span> <span class="n">mv</span> <span class="k">del</span><span class="o">-</span><span class="nb">all</span><span class="o">-</span><span class="n">local</span> <span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span>
+
+  <span class="n">delete</span> <span class="nb">all</span> <span class="n">model</span> <span class="n">version</span> <span class="n">packages</span> <span class="n">of</span> <span class="n">a</span> <span class="n">model</span>
+
+<span class="n">Options</span><span class="p">:</span>
+  <span class="o">--</span><span class="n">muuid</span> <span class="n">TEXT</span>       <span class="n">model</span> <span class="n">uuid</span>
+  <span class="o">--</span><span class="n">model_name</span> <span class="n">TEXT</span>  <span class="n">model</span> <span class="n">name</span>
+  <span class="o">--</span><span class="n">force</span>            <span class="n">force</span> <span class="n">delete</span> <span class="n">model</span> <span class="n">when</span> <span class="n">a</span> <span class="n">local</span><span class="o">-</span><span class="kn">import</span> <span class="nn">muuid</span> <span class="ow">is</span> <span class="n">given</span>
+  <span class="o">--</span><span class="n">help</span>             <span class="n">Show</span> <span class="n">this</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span><span class="o">.</span>
 </pre></div>
 </div>
 </section>

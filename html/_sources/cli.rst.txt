@@ -24,6 +24,9 @@ This sub-command initializes SDK settings::
     --default_project_val TEXT
     --default_model_type [uuid|name]
     --default_model_val TEXT
+    --default_enc_model_cleanup [never|after-load]
+                                    default model file cleanup policy for
+                                    encrypted models during model's active time
     --help                          Show this message and exit.
 
 
@@ -95,3 +98,39 @@ This sub-command lists local model versions::
 
     Options:
     --help  Show this message and exit.
+
+
+del-local
+~~~~~~~~~
+
+This sub-command deletes a model version package::
+
+    Usage: mlsteam-model-cli mv del-local [OPTIONS]
+    
+      delete a model version package
+    
+    Options:
+      --vuuid TEXT         version uuid
+      --version_name TEXT  version name
+      --muuid TEXT         model uuid
+      --model_name TEXT    model name
+      --del_all            delete all matching model versions; by default, it
+                           reports an error when multiple matching model versions
+                           are found
+      --help               Show this message and exit.
+
+
+del-all-local
+~~~~~~~~~~~~~
+
+This sub-command deletes all model version packages of a model::
+
+    Usage: mlsteam-model-cli mv del-all-local [OPTIONS]
+    
+      delete all model version packages of a model
+    
+    Options:
+      --muuid TEXT       model uuid
+      --model_name TEXT  model name
+      --force            force delete model when a local-import muuid is given
+      --help             Show this message and exit.
