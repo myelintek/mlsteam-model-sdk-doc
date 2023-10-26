@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlsteam-model-sdk &mdash; MLSteam Model SDK 0.5.0 documentation</title>
+  <title>mlsteam-model-sdk &mdash; MLSteam Model SDK 0.6.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -50,8 +50,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#initilize-sdk">Initilize SDK</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#downloading-a-model-version-with-sdk">Downloading a model version with SDK</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#importing-a-model-version-with-cli">Importing a model version with CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#download-a-model-version-with-sdk">Download a model version with SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-a-model-version-with-sdk">Import a model version with SDK</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-a-model-version-with-cli">Import a model version with CLI</a></li>
 </ul>
 </li>
 </ul>
@@ -125,8 +126,8 @@ with this command instead, or by editing the <em>api_token</em> field in <code c
 </pre></div>
 </div>
 </section>
-<section id="downloading-a-model-version-with-sdk">
-<h3>Downloading a model version with SDK<a class="headerlink" href="#downloading-a-model-version-with-sdk" title="Permalink to this heading"></a></h3>
+<section id="download-a-model-version-with-sdk">
+<h3>Download a model version with SDK<a class="headerlink" href="#download-a-model-version-with-sdk" title="Permalink to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlsteam_model_sdk.sdk.model</span> <span class="kn">import</span> <span class="n">Model</span>
 
 <span class="n">sdk_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
@@ -135,8 +136,7 @@ with this command instead, or by editing the <em>api_token</em> field in <code c
 </pre></div>
 </div>
 <blockquote>
-<div><p>You will need administrator privileges to handle encrypted model versions. For this case, either run the Python program with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, or enter your password in a <code class="docutils literal notranslate"><span class="pre">sudo</span></code> prompt during program execution.
-Administrator privileges are not required when you only process non-encrypted model versions.</p>
+<div><p>You will need administrator privileges to handle encrypted model versions. For this case, either run the Python program with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>, or enter your password in a <code class="docutils literal notranslate"><span class="pre">sudo</span></code> prompt during program execution.</p>
 </div></blockquote>
 <blockquote>
 <div><p>By default, the model version will be downloaded at <code class="docutils literal notranslate"><span class="pre">$HOME/.mlsteam-model-sdk/models/download/</span></code>.</p>
@@ -148,8 +148,41 @@ Administrator privileges are not required when you only process non-encrypted mo
 </pre></div>
 </div>
 </section>
-<section id="importing-a-model-version-with-cli">
-<h3>Importing a model version with CLI<a class="headerlink" href="#importing-a-model-version-with-cli" title="Permalink to this heading"></a></h3>
+<section id="import-a-model-version-with-sdk">
+<h3>Import a model version with SDK<a class="headerlink" href="#import-a-model-version-with-sdk" title="Permalink to this heading"></a></h3>
+<p>There is an alternative way (2-stage model deployment) to import a model version without connecting to an MLSteam system.
+Rather than downloading from MLSteam directory, it involves (1) getting the related file(s) from MLSteam and then
+(2) importing the model version from the file(s). This alternative way adds complexity of managing the model file(s) but
+is suitable for the situation where there is no network connection to the MLSteam system.</p>
+<blockquote>
+<div><p>This example assumes the following files are locally available:</p>
+<ol class="arabic simple">
+<li><p>model version package (required)</p></li>
+<li><p>package encryption key (required only for encrypted packages)</p></li>
+</ol>
+</div></blockquote>
+<blockquote>
+<div><p>You will need administrator privileges to import an encrypted model version, as mentioned in the previous example.</p>
+</div></blockquote>
+<p>To import a package:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlsteam_model_sdk.sdk.model</span> <span class="kn">import</span> <span class="n">Model</span>
+
+<span class="n">sdk_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">offline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sdk_model</span><span class="o">.</span><span class="n">import_model_version</span><span class="p">(</span><span class="n">mv_package_file</span><span class="o">=</span><span class="s1">&#39;path/to/mv/package/file&#39;</span><span class="p">,</span>
+                               <span class="n">enckey_file</span><span class="o">=</span><span class="s1">&#39;path/to/enckey/file&#39;</span><span class="p">)</span>
+<span class="c1"># for non-encrypted package</span>
+<span class="c1"># sdk_model.import_model_version(mv_package_file=&#39;path/to/mv/package/file&#39;)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>We set <code class="docutils literal notranslate"><span class="pre">offline=True</span></code> to have SDK operate in offline mode (without connecting to MLSteam).</p></li>
+<li><p>By default, the model and version names to register are read from the package manifest. You may customize these settings with the <code class="docutils literal notranslate"><span class="pre">model_name</span></code> and <code class="docutils literal notranslate"><span class="pre">version_name</span></code> parameters.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="import-a-model-version-with-cli">
+<h3>Import a model version with CLI<a class="headerlink" href="#import-a-model-version-with-cli" title="Permalink to this heading"></a></h3>
 <blockquote>
 <div><p>This example assumes the following files are locally available:</p>
 <ol class="arabic simple">
