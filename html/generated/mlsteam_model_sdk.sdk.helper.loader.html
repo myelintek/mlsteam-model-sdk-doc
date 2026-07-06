@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mlsteam_model_sdk.sdk.helper.loader &mdash; MLSteam Model SDK 0.8.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mlsteam_model_sdk.sdk.helper.loader.torch" href="mlsteam_model_sdk.sdk.helper.loader.torch.html" />
+    <link rel="prev" title="mlsteam_model_sdk.core.registry" href="mlsteam_model_sdk.core.registry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MLSteam Model SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_developer/index.html">Model Developer’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../sdk.html">SDK</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.core.exceptions.html">mlsteam_model_sdk.core.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.core.registry.html">mlsteam_model_sdk.core.registry</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mlsteam_model_sdk.sdk.helper.loader</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader"><code class="docutils literal notranslate"><span class="pre">ArchiveModelFileLoader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader.__init__"><code class="docutils literal notranslate"><span class="pre">ArchiveModelFileLoader.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader.get_submodel_base_dir"><code class="docutils literal notranslate"><span class="pre">ArchiveModelFileLoader.get_submodel_base_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader.get_submodel_dir"><code class="docutils literal notranslate"><span class="pre">ArchiveModelFileLoader.get_submodel_dir()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase"><code class="docutils literal notranslate"><span class="pre">BuiltInLoaderBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase.__init__"><code class="docutils literal notranslate"><span class="pre">BuiltInLoaderBase.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase.validate"><code class="docutils literal notranslate"><span class="pre">BuiltInLoaderBase.validate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase.validate_src_module_args"><code class="docutils literal notranslate"><span class="pre">BuiltInLoaderBase.validate_src_module_args()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderHub"><code class="docutils literal notranslate"><span class="pre">BuiltInLoaderHub</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderHub.get"><code class="docutils literal notranslate"><span class="pre">BuiltInLoaderHub.get()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader"><code class="docutils literal notranslate"><span class="pre">FileSystemModelFileLoader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader.__init__"><code class="docutils literal notranslate"><span class="pre">FileSystemModelFileLoader.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader.get_submodel_base_dir"><code class="docutils literal notranslate"><span class="pre">FileSystemModelFileLoader.get_submodel_base_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader.get_submodel_dir"><code class="docutils literal notranslate"><span class="pre">FileSystemModelFileLoader.get_submodel_dir()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase"><code class="docutils literal notranslate"><span class="pre">ModelFileLoaderBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase.get_submodel_base_dir"><code class="docutils literal notranslate"><span class="pre">ModelFileLoaderBase.get_submodel_base_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase.get_submodel_dir"><code class="docutils literal notranslate"><span class="pre">ModelFileLoaderBase.get_submodel_dir()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.sdk.helper.loader.torch.html">mlsteam_model_sdk.sdk.helper.loader.torch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.sdk.helper.predictor.html">mlsteam_model_sdk.sdk.helper.predictor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.sdk.helper.predictor.torch.html">mlsteam_model_sdk.sdk.helper.predictor.torch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.sdk.model.html">mlsteam_model_sdk.sdk.model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.utils.config.html">mlsteam_model_sdk.utils.config</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Releases</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MLSteam Model SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../sdk.html">SDK</a></li>
+      <li class="breadcrumb-item active">mlsteam_model_sdk.sdk.helper.loader</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/mlsteam_model_sdk.sdk.helper.loader.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-mlsteam_model_sdk.sdk.helper.loader">
+<span id="mlsteam-model-sdk-sdk-helper-loader"></span><h1>mlsteam_model_sdk.sdk.helper.loader<a class="headerlink" href="#module-mlsteam_model_sdk.sdk.helper.loader" title="Permalink to this heading"></a></h1>
+<p>Model archive loader interface</p>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader" title="mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArchiveModelFileLoader</span></code></a>(root)</p></td>
+<td><p>A low-level model file loader for model archive</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase" title="mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BuiltInLoaderBase</span></code></a>(pkg_module_path)</p></td>
+<td><p>Built-in loader base class</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderHub" title="mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderHub"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BuiltInLoaderHub</span></code></a>()</p></td>
+<td><p>Built-in loader access hub</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader" title="mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FileSystemModelFileLoader</span></code></a>(root)</p></td>
+<td><p>A low-level model file loader for file system</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase" title="mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ModelFileLoaderBase</span></code></a>(*args, **kwds)</p></td>
+<td><p>A low-level model file loader base class</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlsteam_model_sdk.sdk.helper.loader.</span></span><span class="sig-name descname"><span class="pre">ArchiveModelFileLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ZipFile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase" title="mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelFileLoaderBase</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>]</p>
+<p>A low-level model file loader for model archive</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ZipFile</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader.get_submodel_base_dir">
+<span class="sig-name descname"><span class="pre">get_submodel_base_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader.get_submodel_base_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Gets base directory path for submodels.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader.get_submodel_dir">
+<span class="sig-name descname"><span class="pre">get_submodel_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subm_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.ArchiveModelFileLoader.get_submodel_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the directory for a submodel</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlsteam_model_sdk.sdk.helper.loader.</span></span><span class="sig-name descname"><span class="pre">BuiltInLoaderBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkg_module_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Built-in loader base class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkg_module_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase.validate">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Validates loader args</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase.validate_src_module_args">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate_src_module_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src_module_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PurePath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase.validate_src_module_args" title="Permalink to this definition"></a></dt>
+<dd><p>Validates source module loading args</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderHub">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlsteam_model_sdk.sdk.helper.loader.</span></span><span class="sig-name descname"><span class="pre">BuiltInLoaderHub</span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderHub" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Built-in loader access hub</p>
+<p>It loads a loader until requested to avoid undesired runtime dependency (E.g., torch, tensorflow).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderHub.get">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loader_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase" title="mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase"><span class="pre">BuiltInLoaderBase</span></a></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderHub.get" title="Permalink to this definition"></a></dt>
+<dd><p>Gets a built-in loader by name</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlsteam_model_sdk.sdk.helper.loader.</span></span><span class="sig-name descname"><span class="pre">FileSystemModelFileLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase" title="mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelFileLoaderBase</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code>]</p>
+<p>A low-level model file loader for file system</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader.get_submodel_base_dir">
+<span class="sig-name descname"><span class="pre">get_submodel_base_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader.get_submodel_base_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Gets base directory path for submodels.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader.get_submodel_dir">
+<span class="sig-name descname"><span class="pre">get_submodel_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subm_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Path</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.FileSystemModelFileLoader.get_submodel_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the directory for a submodel</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlsteam_model_sdk.sdk.helper.loader.</span></span><span class="sig-name descname"><span class="pre">ModelFileLoaderBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">PathT</span></code>]</p>
+<p>A low-level model file loader base class</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase.get_submodel_base_dir">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_submodel_base_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PathT</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase.get_submodel_base_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Gets base directory path for submodels.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase.get_submodel_dir">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_submodel_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subm_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">PathT</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase.get_submodel_dir" title="Permalink to this definition"></a></dt>
+<dd><p>Gets the directory for a submodel</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mlsteam_model_sdk.core.registry.html" class="btn btn-neutral float-left" title="mlsteam_model_sdk.core.registry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mlsteam_model_sdk.sdk.helper.loader.torch.html" class="btn btn-neutral float-right" title="mlsteam_model_sdk.sdk.helper.loader.torch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, MyelinTek Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -44,6 +44,177 @@ This sub-command installs Themis encryption development package::
     --help                          Show this message and exit.
 
 
+check
+-----
+
+This sub-command tests whether the model SDK has been initialized
+(whether an SDK configuration path is discovered)::
+
+    Options:
+      --help  Show this message and exit.
+
+
+dev manifest
+------------
+
+🧑‍💻 **Model developer kit** - manifest under development.
+
+
+check
+~~~~~
+
+This sub-command validates a manifest file::
+
+  Usage: mlsteam-model-cli dev manifest check [OPTIONS]
+
+    validate a manifest file
+
+  Options:
+    -M, --manifest FILE  manifest file
+    --deep               deep validation (including built-in hook argument
+                         validation; it requires relavent ML-framework
+                         libraries)
+    --help               Show this message and exit.
+
+
+dev mv
+------
+
+🧑‍💻 **Model developer kit** - model versions under development.
+
+
+add-local
+~~~~~~~~~
+
+This sub-command adds a model version under development::
+
+  Usage: mlsteam-model-cli dev mv add-local [OPTIONS]
+
+    add a model version under development
+
+  Options:
+    --model-name TEXT               model name  [required]
+    --version-name TEXT             version name  [required]
+    --hooks-dir TEXT                hooks directory (a path relative to the
+                                    current directory or an absolute path)
+    --src-dir TEXT                  src directory (a path relative to the
+                                    current directory or an absolute path)
+    --submodel <TEXT TEXT>...       submodel name & its source path (separated
+                                    by a space), could be specified multiple
+                                    times. Source path could be a file or a
+                                    directory, relative to the current directory
+                                    or an absolute path.
+    --manifest FILE                 path of manifest file to read or generate
+    --encrypted                     simulate an encrypted model version
+    --force-abs-paths               force saving absolute paths in settings (By
+                                    default, paths relative to SDK settings base
+                                    directory are saved when applicable)
+    --preserve-model-files-in-src   do not exclude submodel files from src (By
+                                    default, submodel files are excluded from
+                                    the src directory)
+    --preserve-hooks-dir-in-src     do not exclude hooks directory from src (By
+                                    default, hooks directory is excluded from
+                                    the src directory)
+    --gen-manifest [never|when-not-exists|always]
+                                    when to generate manifest
+    -X, --default-exclude-pattern TEXT
+                                    exclude any file matching the given
+                                    pattern(s) (Default: ('__pycache__',
+                                    '*.py[cod]', '*$py.class',
+                                    '.ipynb_checkpoints'))
+    --help                          Show this message and exit.
+
+
+update-local
+~~~~~~~~~~~~
+
+This sub-command updates a model version under development::
+
+  Usage: mlsteam-model-cli dev mv update-local [OPTIONS]
+
+    update a model version under development
+
+  Options:
+    --model-name TEXT               model name  [required]
+    --version-name TEXT             version name  [required]
+    --new-model-name TEXT           update model name
+    --new-version-name TEXT         update version name
+    --hooks-dir TEXT                update hooks directory (a path relative to
+                                    the current directory or an absolute path).
+                                    To clear out hooks directory, use `--no-
+                                    hooks-dir` instead.
+    --no-hooks-dir                  clear out hooks directory
+    --src-dir TEXT                  update src directory (a path relative to the
+                                    current directory or an absolute path). To
+                                    clear out src directory, use `--no-src-dir`
+                                    instead.
+    --no-src-dir                    clear out src directory
+    --add-submodel <TEXT TEXT>...   add a submodel by its name & its source path
+                                    (separated by a space), could be specified
+                                    multiple times. Source path could be a file
+                                    or a directory, relative to the current
+                                    directory or an absolute path.
+    --del-submodel TEXT             delete a previously defined submodel by its
+                                    name, could be specified multiple times.
+    --manifest FILE                 update path of manifest file to read or
+                                    generate
+    --encrypted / --no-encrypted    simulate an encrypted model version
+    --force-abs-paths / --no-force-abs-paths
+                                    force saving absolute paths in settings
+    --preserve-model-files-in-src / --no-preserve-model-files-in-src
+                                    do not exclude submodel files from src
+    --preserve-hooks-dir-in-src / --no-preserve-hooks-dir-in-src
+                                    do not exclude hooks directory from src
+    --gen-manifest [never|when-not-exists|always]
+                                    when to generate manifest
+    --add-default-exclude-pattern TEXT
+                                    add a file exclusion pattern
+    --del-default-exclude-pattern TEXT
+                                    delete a previously defined file exclusion
+                                    pattern
+    --sync                          sync model version by re-building archive
+                                    (and re-generating manifest if overwite-
+                                    existing-manifest is enabled) based on
+                                    changed settings. By default, sync is
+                                    deferred until the `dev mv sync` command.
+    --help                          Show this message and exit.
+
+
+sync-local
+~~~~~~~~~~
+
+This sub-command synchronizes a model version::
+
+  Usage: mlsteam-model-cli dev mv sync-local [OPTIONS]
+
+    sync a model version by re-building archive (and re-generating manifest if
+    overwite-existing-manifest is enabled) based on changed settings. By
+    default, sync is deferred until the `dev mv sync` command.
+
+  Options:
+    --model-name TEXT    model name  [required]
+    --version-name TEXT  version name  [required]
+    --help               Show this message and exit.
+
+
+list-local
+~~~~~~~~~~
+
+This sub-command lists model version(s) under development::
+
+  Usage: mlsteam-model-cli dev mv list-local [OPTIONS]
+
+    list model version(s) under development
+
+  Options:
+    --model-name TEXT    filter by model name
+    --version-name TEXT  filter by version name (should be used with version-
+                        name)
+    --vuuid TEXT         filter by version uuid (will overwrite model-name and
+                        version-name)
+    --help               Show this message and exit.
+
+
 mv
 ---
 
@@ -55,16 +226,18 @@ get-local
 
 This sub-command gets local model version info::
 
-    Usage: mlsteam-model-cli mv get-local [OPTIONS]
+  Usage: mlsteam-model-cli mv get-local [OPTIONS]
 
     get local model version info
 
-    Options:
-    --vuuid TEXT         version uuid
-    --version_name TEXT  version name
-    --muuid TEXT         model uuid
-    --model_name TEXT    model name
-    --help               Show this message and exit.
+  Options:
+    --vuuid TEXT                    version uuid
+    --version-name, --version_name TEXT
+                                    version name
+    --muuid TEXT                    model uuid
+    --model-name, --model_name TEXT
+                                    model name
+    --help                          Show this message and exit.
 
 
 import-local
@@ -72,19 +245,23 @@ import-local
 
 This sub-command imports a model version package::
 
-    Usage: mlsteam-model-cli mv import-local [OPTIONS]
+  Usage: mlsteam-model-cli mv import-local [OPTIONS]
 
     import a model version package
 
-    Options:
-    -f, --pkg_file PATH     model version package file  [required]
-    -k, --enckey_file PATH  model version package encryption key file (required
-                            for encrypted packages)
-    --model_name TEXT       model name to register (a default value is used if
-                            not given)
-    --version_name TEXT     version name to register (a default value is used if
-                            not given)
-    --help                  Show this message and exit.
+  Options:
+    -f, --pkg-file, --pkg_file PATH
+                                    model version package file  [required]
+    -k, --enckey-file, --enckey_file PATH
+                                    model version package encryption key file
+                                    (required for encrypted packages)
+    --model-name, --model_name TEXT
+                                    model name to register (a default value is
+                                    used if not given)
+    --version-name, --version_name TEXT
+                                    version name to register (a default value is
+                                    used if not given)
+    --help                          Show this message and exit.
 
 
 list-local
@@ -105,19 +282,21 @@ del-local
 
 This sub-command deletes a model version package::
 
-    Usage: mlsteam-model-cli mv del-local [OPTIONS]
-    
-      delete a model version package
-    
-    Options:
-      --vuuid TEXT         version uuid
-      --version_name TEXT  version name
-      --muuid TEXT         model uuid
-      --model_name TEXT    model name
-      --del_all            delete all matching model versions; by default, it
-                           reports an error when multiple matching model versions
-                           are found
-      --help               Show this message and exit.
+  Usage: mlsteam-model-cli mv del-local [OPTIONS]
+
+    delete a model version package
+
+  Options:
+    --vuuid TEXT                    version uuid
+    --version-name, --version_name TEXT
+                                    version name
+    --muuid TEXT                    model uuid
+    --model-name, --model_name TEXT
+                                    model name
+    --del-all, --del_all            delete all matching model versions; by
+                                    default, it reports an error when multiple
+                                    matching model versions are found
+    --help                          Show this message and exit.
 
 
 del-all-local
@@ -125,12 +304,18 @@ del-all-local
 
 This sub-command deletes all model version packages of a model::
 
-    Usage: mlsteam-model-cli mv del-all-local [OPTIONS]
-    
-      delete all model version packages of a model
-    
-    Options:
-      --muuid TEXT       model uuid
-      --model_name TEXT  model name
-      --force            force delete model when a local-import muuid is given
-      --help             Show this message and exit.
+  Usage: mlsteam-model-cli mv del-local [OPTIONS]
+
+    delete a model version package
+
+  Options:
+    --vuuid TEXT                    version uuid
+    --version-name, --version_name TEXT
+                                    version name
+    --muuid TEXT                    model uuid
+    --model-name, --model_name TEXT
+                                    model name
+    --del-all, --del_all            delete all matching model versions; by
+                                    default, it reports an error when multiple
+                                    matching model versions are found
+    --help                          Show this message and exit.

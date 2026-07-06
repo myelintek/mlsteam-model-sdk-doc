@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Model Developer’s Guide &mdash; MLSteam Model SDK 0.6.0 documentation</title>
+  <title>Model Developer’s Guide &mdash; MLSteam Model SDK 0.8.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="MLSteam Model Archive Specification (v2023.1)" href="mlarchive_spec.html" />
+    <link rel="next" title="Built-in Hooks" href="built-in-hooks.html" />
     <link rel="prev" title="mlsteam-model-sdk" href="../readme.html" /> 
 </head>
 
@@ -48,8 +48,12 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../readme.html">README</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Model Developer’s Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec.html">MLSteam Model Archive Specification (v2023.1)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="built-in-hooks.html">Built-in Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec/v2024.1.html">MLSteam Model Archive Specification (v2024.1)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-archive-specification">Model Archive Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manifest-json-schema">Manifest JSON Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
@@ -86,28 +90,47 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="mlarchive_spec.html">MLSteam Model Archive Specification (v2023.1)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec.html#internal-directory-structure">Internal directory structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec.html#models">Models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec.html#hooks">Hooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec.html#manifest">Manifest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="built-in-hooks.html">Built-in Hooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="built-in-hooks.html#loaders">Loaders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="built-in-hooks.html#predictors">Predictors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mlarchive_spec/v2024.1.html">MLSteam Model Archive Specification (v2024.1)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec/v2024.1.html#internal-directory-structure">Internal directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec/v2024.1.html#models">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec/v2024.1.html#hooks">Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec/v2024.1.html#source">Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec/v2024.1.html#file-checking">File checking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlarchive_spec/v2024.1.html#manifest">Manifest</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="examples/tensorflow_stockpred.html">TensorFlow Stock Prediction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/pytorch_cifar10.html">PyTorch Cifar10 Image Classification</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<dl class="simple">
-<dt><a class="reference internal" href="mlarchive_spec.html"><span class="doc">MLSteam Model Archive Specification (v2023.1)</span></a></dt><dd><p>specifies the model package’s format. You don’t need to package the model by yourself,
-but the included files and directory structure should follow this spec.</p>
-</dd>
-<dt><a class="reference download internal" download="" href="../_downloads/0c1afcad377d02a0c3290ea13499975a/mlarchive_manifest_schema-v2023.1.json"><code class="xref download docutils literal notranslate"><span class="pre">MLSteam</span> <span class="pre">Model</span> <span class="pre">Archive</span> <span class="pre">Specification</span> <span class="pre">(v2023.1)</span> <span class="pre">Manifest</span> <span class="pre">Schema</span></code></a></dt><dd><p>JSON schema for the model package’s manifest format.</p>
-</dd>
-<dt><a class="reference internal" href="examples/index.html"><span class="doc">Examples</span></a></dt><dd><p>demonstrate the SDK usage.</p>
-</dd>
-</dl>
+<section id="model-archive-specification">
+<h2>Model Archive Specification<a class="headerlink" href="#model-archive-specification" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="mlarchive_spec/v2024.1.html"><span class="doc">MLSteam Model Archive Specification (v2024.1)</span></a> (latest)</p></li>
+<li><p><a class="reference internal" href="mlarchive_spec/v2023.1.html"><span class="doc">MLSteam Model Archive Specification (v2023.1)</span></a></p></li>
+</ul>
+</section>
+<section id="manifest-json-schema">
+<h2>Manifest JSON Schema<a class="headerlink" href="#manifest-json-schema" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="../_downloads/e53ddcbc131f5abf41a3fde1b1679da2/v2024.1.json"><code class="xref download docutils literal notranslate"><span class="pre">v2024.1</span></code></a> (latest)</p></li>
+<li><p><a class="reference download internal" download="" href="../_downloads/4fdb616827b871451e565908242891a2/v2023.1.json"><code class="xref download docutils literal notranslate"><span class="pre">v2023.1</span></code></a></p></li>
+</ul>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="examples/index.html"><span class="doc">Examples</span></a></p></li>
+</ul>
+</section>
 </section>
 
 
@@ -115,13 +138,13 @@ but the included files and directory structure should follow this spec.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../readme.html" class="btn btn-neutral float-left" title="mlsteam-model-sdk" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="mlarchive_spec.html" class="btn btn-neutral float-right" title="MLSteam Model Archive Specification (v2023.1)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="built-in-hooks.html" class="btn btn-neutral float-right" title="Built-in Hooks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, MyelinTek Inc..</p>
+    <p>&#169; Copyright 2026, MyelinTek Inc..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

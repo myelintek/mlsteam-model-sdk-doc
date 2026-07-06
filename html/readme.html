@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlsteam-model-sdk &mdash; MLSteam Model SDK 0.6.0 documentation</title>
+  <title>mlsteam-model-sdk &mdash; MLSteam Model SDK 0.8.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
@@ -55,6 +55,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#import-a-model-version-with-cli">Import a model version with CLI</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#model-development">Model Development</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="model_developer/index.html">Model Developer’s Guide</a></li>
@@ -123,6 +124,12 @@ with this command instead, or by editing the <em>api_token</em> field in <code c
 <span class="w">    </span>--api_token<span class="o">=</span><span class="nv">$YOUR_API_TOKEN</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--default_project_type<span class="o">=</span>name<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--default_project_val<span class="o">=</span><span class="nv">$PROJECT_OWNER</span>/<span class="nv">$PROJECT_NAME</span>
+</pre></div>
+</div>
+<p>This checks whether SDK has been initialized:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mlsteam-model-cli<span class="w"> </span>check
+<span class="go">[v] SDK has been initialized.</span>
+<span class="go">Configuration file: /home/ubuntu/.mlsteam-model-sdk/cfg.ini</span>
 </pre></div>
 </div>
 </section>
@@ -221,6 +228,18 @@ mlsteam-model-cli<span class="w"> </span>mv<span class="w"> </span>import-local<
 </div></blockquote>
 </section>
 </section>
+<section id="model-development">
+<h2>Model Development<a class="headerlink" href="#model-development" title="Permalink to this heading"></a></h2>
+<p>The SDK is equipped with Model Development Kit (MDK) to support the following activities:</p>
+<ol class="arabic simple">
+<li><p>Generating a skeleton of manifest file;</p></li>
+<li><p>Validating a manifest file;</p></li>
+<li><p>Creating a model version under development locally;</p></li>
+<li><p>Loading a model version under development locally;</p></li>
+<li><p>Registering a model version (🕒 future work).</p></li>
+</ol>
+<p>More information could be found in <em>Model Developer’s Guide</em> in SDK documentation.</p>
+</section>
 </section>
 
 
@@ -234,7 +253,7 @@ mlsteam-model-cli<span class="w"> </span>mv<span class="w"> </span>import-local<
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, MyelinTek Inc..</p>
+    <p>&#169; Copyright 2026, MyelinTek Inc..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

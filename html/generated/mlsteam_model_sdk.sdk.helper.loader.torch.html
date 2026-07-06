@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mlsteam_model_sdk.sdk.helper.loader.torch &mdash; MLSteam Model SDK 0.8.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mlsteam_model_sdk.sdk.helper.predictor" href="mlsteam_model_sdk.sdk.helper.predictor.html" />
+    <link rel="prev" title="mlsteam_model_sdk.sdk.helper.loader" href="mlsteam_model_sdk.sdk.helper.loader.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MLSteam Model SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model_developer/index.html">Model Developer’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../sdk.html">SDK</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.core.exceptions.html">mlsteam_model_sdk.core.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.core.registry.html">mlsteam_model_sdk.core.registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.sdk.helper.loader.html">mlsteam_model_sdk.sdk.helper.loader</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mlsteam_model_sdk.sdk.helper.loader.torch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.torch.Loader"><code class="docutils literal notranslate"><span class="pre">Loader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.torch.Loader.from_state_dicts"><code class="docutils literal notranslate"><span class="pre">Loader.from_state_dicts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.torch.Loader.from_submodel"><code class="docutils literal notranslate"><span class="pre">Loader.from_submodel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.torch.Loader.from_submodel_state_dicts"><code class="docutils literal notranslate"><span class="pre">Loader.from_submodel_state_dicts()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.torch.TorchBuiltInLoader"><code class="docutils literal notranslate"><span class="pre">TorchBuiltInLoader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.torch.TorchBuiltInLoader.validate"><code class="docutils literal notranslate"><span class="pre">TorchBuiltInLoader.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.torch.iter_state_dicts_simple"><code class="docutils literal notranslate"><span class="pre">iter_state_dicts_simple()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.sdk.helper.predictor.html">mlsteam_model_sdk.sdk.helper.predictor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.sdk.helper.predictor.torch.html">mlsteam_model_sdk.sdk.helper.predictor.torch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.sdk.model.html">mlsteam_model_sdk.sdk.model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlsteam_model_sdk.utils.config.html">mlsteam_model_sdk.utils.config</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Releases</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MLSteam Model SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../sdk.html">SDK</a></li>
+      <li class="breadcrumb-item active">mlsteam_model_sdk.sdk.helper.loader.torch</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/mlsteam_model_sdk.sdk.helper.loader.torch.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-mlsteam_model_sdk.sdk.helper.loader.torch">
+<span id="mlsteam-model-sdk-sdk-helper-loader-torch"></span><h1>mlsteam_model_sdk.sdk.helper.loader.torch<a class="headerlink" href="#module-mlsteam_model_sdk.sdk.helper.loader.torch" title="Permalink to this heading"></a></h1>
+<p>High-level loader interface for PyTorch</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.torch.iter_state_dicts_simple" title="mlsteam_model_sdk.sdk.helper.loader.torch.iter_state_dicts_simple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iter_state_dicts_simple</span></code></a>(base_dir_path[, ...])</p></td>
+<td><p>Iterates the state-dict files under the current directory.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.torch.Loader" title="mlsteam_model_sdk.sdk.helper.loader.torch.Loader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Loader</span></code></a>()</p></td>
+<td><p>PyTorch loader</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mlsteam_model_sdk.sdk.helper.loader.torch.TorchBuiltInLoader" title="mlsteam_model_sdk.sdk.helper.loader.torch.TorchBuiltInLoader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TorchBuiltInLoader</span></code></a>(pkg_module_path)</p></td>
+<td><p>PyTorch built-in loader</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.torch.Loader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlsteam_model_sdk.sdk.helper.loader.torch.</span></span><span class="sig-name descname"><span class="pre">Loader</span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.torch.Loader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>PyTorch loader</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.torch.Loader.from_state_dicts">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_state_dicts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_dict_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Module</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.torch.Loader.from_state_dicts" title="Permalink to this definition"></a></dt>
+<dd><p>Loads a PyTorch model from state-dict files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_obj</strong> – a PyTorch model object to load model weights</p></li>
+<li><p><strong>state_dict_paths</strong> – a list of PyTorch state-dict files with the model weights</p></li>
+<li><p><strong>device</strong> – destination device of loaded state tensor and model (E.g., ‘cpu’, ‘cuda’, ‘cuda:0’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the PyTorch model object with loaded model weights</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.torch.Loader.from_submodel">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_submodel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file_loader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mlsteam_model_sdk.sdk.helper.loader.html#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase" title="mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase"><span class="pre">ModelFileLoaderBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">subm_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Module</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.torch.Loader.from_submodel" title="Permalink to this definition"></a></dt>
+<dd><p>A convenient function for loading a PyTorch model under a submodel directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_obj</strong> – a PyTorch model object to load model weights</p></li>
+<li><p><strong>model_file_loader</strong> – the file loader passed by SDK in loader hooks</p></li>
+<li><p><strong>subm_name</strong> – submodel name</p></li>
+<li><p><strong>device</strong> – destination device of loaded model (E.g., ‘cpu’, ‘cuda’, ‘cuda:0’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the PyTorch model object with loaded model weights</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.torch.Loader.from_submodel_state_dicts">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_submodel_state_dicts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_file_loader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mlsteam_model_sdk.sdk.helper.loader.html#mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase" title="mlsteam_model_sdk.sdk.helper.loader.ModelFileLoaderBase"><span class="pre">ModelFileLoaderBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">subm_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Module</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.torch.Loader.from_submodel_state_dicts" title="Permalink to this definition"></a></dt>
+<dd><p>Loads a PyTorch model from state-dict files under a submodel directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_obj</strong> – a PyTorch model object to load model weights</p></li>
+<li><p><strong>model_file_loader</strong> – the file loader passed by SDK in loader hooks</p></li>
+<li><p><strong>subm_name</strong> – submodel name</p></li>
+<li><p><strong>file_iter</strong> – an iterator for the state-dict files. By default, it calls <cite>iter_state_dicts_simple()</cite>
+to iterate all files with the <cite>.pt</cite> or <cite>.pth</cite> extension names.</p></li>
+<li><p><strong>device</strong> – destination device of loaded state tensor and model (E.g., ‘cpu’, ‘cuda’, ‘cuda:0’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the PyTorch model object with loaded model weights</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.torch.TorchBuiltInLoader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mlsteam_model_sdk.sdk.helper.loader.torch.</span></span><span class="sig-name descname"><span class="pre">TorchBuiltInLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkg_module_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.torch.TorchBuiltInLoader" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="mlsteam_model_sdk.sdk.helper.loader.html#mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase" title="mlsteam_model_sdk.sdk.helper.loader.BuiltInLoaderBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">BuiltInLoaderBase</span></code></a></p>
+<p>PyTorch built-in loader</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.torch.TorchBuiltInLoader.validate">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.torch.TorchBuiltInLoader.validate" title="Permalink to this definition"></a></dt>
+<dd><p>Validates loader args</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mlsteam_model_sdk.sdk.helper.loader.torch.iter_state_dicts_simple">
+<span class="sig-prename descclassname"><span class="pre">mlsteam_model_sdk.sdk.helper.loader.torch.</span></span><span class="sig-name descname"><span class="pre">iter_state_dicts_simple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_dir_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Path</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Path</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_extensions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('.pt',</span> <span class="pre">'.pth')</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span></span></span><a class="headerlink" href="#mlsteam_model_sdk.sdk.helper.loader.torch.iter_state_dicts_simple" title="Permalink to this definition"></a></dt>
+<dd><p>Iterates the state-dict files under the current directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_dir_path</strong> – the directory to scan state-dict files</p></li>
+<li><p><strong>file_extensions</strong> – file extensions for matching state-dict files.
+If a file extension does not start with a dot, a dot will be added.
+By default, it matches only (‘.pt’, ‘.pth’) files.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>an iterator for the matched files</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mlsteam_model_sdk.sdk.helper.loader.html" class="btn btn-neutral float-left" title="mlsteam_model_sdk.sdk.helper.loader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mlsteam_model_sdk.sdk.helper.predictor.html" class="btn btn-neutral float-right" title="mlsteam_model_sdk.sdk.helper.predictor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, MyelinTek Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

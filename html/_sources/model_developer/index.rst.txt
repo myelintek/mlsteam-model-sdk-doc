@@ -5,13 +5,23 @@ Model Developer's Guide
    :maxdepth: 2
    :caption: Contents
 
-   mlarchive_spec
+   built-in-hooks
+   mlarchive_spec/v2024.1
    examples/index
 
-:doc:`mlarchive_spec`
-  specifies the model package's format. You don't need to package the model by yourself,
-  but the included files and directory structure should follow this spec.
-:download:`MLSteam Model Archive Specification (v2023.1) Manifest Schema <mlarchive_manifest_schema-v2023.1.json>`
-  JSON schema for the model package's manifest format.
-:doc:`examples/index`
-  demonstrate the SDK usage.
+Model Archive Specification
+---------------------------
+
+* :doc:`mlarchive_spec/v2024.1` (latest)
+* :doc:`mlarchive_spec/v2023.1`
+
+Manifest JSON Schema
+--------------------
+
+* :download:`v2024.1 <mlarchive_manifest_schema/v2024.1.json>` (latest)
+* :download:`v2023.1 <mlarchive_manifest_schema/v2023.1.json>`
+
+Examples
+--------
+
+* :doc:`examples/index`

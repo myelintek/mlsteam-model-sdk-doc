@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "http://www.myelintek.com/schemas/mlarchive_manifest_schema_v1.json",
+    "$id": "http://www.myelintek.com/schemas/mlarchive_manifest_schema_v2023.1.json",
     "type": "object",
     "properties": {
         "models": {

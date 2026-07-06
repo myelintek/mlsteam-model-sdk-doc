@@ -1,0 +1,13 @@
+PyTorch Cifar10 Image Classification
+====================================
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Contents
+
+    /examples/pytorch_cifar10/cifar10_sdk.ipynb
+
+Files:
+
+- :download:`pytorch-cifar10-multiweights.zip </examples/pytorch_cifar10/pytorch-cifar10-multiweights.zip>`
+- :download:`cifar10_sdk.ipynb </examples/pytorch_cifar10/cifar10_sdk.ipynb>`

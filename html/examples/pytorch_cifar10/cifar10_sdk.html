@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyTorch Cifar10 Image Classification &mdash; MLSteam Model SDK 0.8.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CLI" href="../../cli.html" />
+    <link rel="prev" title="PyTorch Cifar10 Image Classification" href="../../model_developer/examples/pytorch_cifar10.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            MLSteam Model SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../model_developer/index.html">Model Developer’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../model_developer/built-in-hooks.html">Built-in Hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model_developer/mlarchive_spec/v2024.1.html">MLSteam Model Archive Specification (v2024.1)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../model_developer/examples/index.html">Examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../model_developer/examples/tensorflow_stockpred.html">TensorFlow Stock Prediction</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../model_developer/examples/pytorch_cifar10.html">PyTorch Cifar10 Image Classification</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">PyTorch Cifar10 Image Classification</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../model_developer/index.html#model-archive-specification">Model Archive Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model_developer/index.html#manifest-json-schema">Manifest JSON Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../model_developer/index.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release.html">Releases</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MLSteam Model SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../model_developer/index.html">Model Developer’s Guide</a></li>
+          <li class="breadcrumb-item"><a href="../../model_developer/examples/index.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="../../model_developer/examples/pytorch_cifar10.html">PyTorch Cifar10 Image Classification</a></li>
+      <li class="breadcrumb-item active">PyTorch Cifar10 Image Classification</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/examples/pytorch_cifar10/cifar10_sdk.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pytorch-cifar10-image-classification">
+<h1>PyTorch Cifar10 Image Classification<a class="headerlink" href="#pytorch-cifar10-image-classification" title="Permalink to this heading"></a></h1>
+<p>💡 This example demonstrates how to use <em>MLSteam Model SDK</em> (Archive <code class="docutils literal notranslate"><span class="pre">v2024.1</span></code>) to develop a Cifar10 model for image classification.</p>
+<p>📘 Cifar10 was introduced by Krizhevsky et al. in <a class="reference external" href="https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf">Learning multiple layers of features from tiny images</a>. The datasets are publicly available in the <a class="reference external" href="https://www.cs.toronto.edu/~kriz/cifar.html">author’s site</a> as well as through many popular ML framework libraries. The PyTorch model training code here originates from a <a class="reference external" href="https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html">PyTorch tutorial</a>.</p>
+<section id="prepare-files">
+<h2>Prepare Files<a class="headerlink" href="#prepare-files" title="Permalink to this heading"></a></h2>
+<p>Download the <code class="docutils literal notranslate"><span class="pre">pytorch-cifar10-multiweights.zip</span></code> file and extract it.</p>
+<p>The extracted files include:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pytorch-cifar10-multiweights/
+  ├ dataset/
+  │  └ samples/
+  │    └ samples.pt  # a torch file containing 4 Cifar10 sample images
+  ├ hooks/
+  │  ├ load.py  # default loader hook 
+  │  └ predict.py  # default predictor hook
+  ├ model/
+  │  ├ cifar_model-1.pth  # 1st state dict file
+  │  └ cifar_model-2.pth  # 2nd state dict file
+  ├ manifest-builtin-hooks.json  # manifest file using built-in hooks
+  ├ manifest-custom-hooks.json  # manifest file using custom hooks
+  ├ manifest.json  # manifest file using default hooks
+  ├ my_hooks.py  # custom hooks
+  ├ requirements.txt  # Python package dependencies
+  └ train_multi_weights.py  # Cifar10 model definition &amp; training script
+</pre></div>
+</div>
+<p>Development typically starts with a model training script, which defines and trains the model from a training dataset. And they add manifest and optionally hook files for model packaging.</p>
+<p>This example includes more files than necessary for demonstrating 3 ways to definining hooks. It also saves the model in 2 state dict files to show how the SDK deals with multi-weight-file models.</p>
+</section>
+<section id="install-packages">
+<h2>Install Packages<a class="headerlink" href="#install-packages" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Install <code class="docutils literal notranslate"><span class="pre">mlsteam-model-sdk</span></code> &gt;= 0.7</p></li>
+<li><p>Initilize SDK by <code class="docutils literal notranslate"><span class="pre">mlsteam-model-cli</span> <span class="pre">init</span> <span class="pre">-i</span></code></p></li>
+<li><p>Install themis by <code class="docutils literal notranslate"><span class="pre">mlsteam-model-cli</span> <span class="pre">install-themisdev</span></code></p></li>
+<li><p>Install cifar10 dependencies as follows.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install cifar10 dependencies</span>
+<span class="o">%</span><span class="k">cd</span> pytorch-cifar10-multiweights
+<span class="o">%</span><span class="k">pip</span> install -r requirements.txt
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/mlsteam/lab/pytorch-cifar10-multiweights
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.10/dist-packages/IPython/core/magics/osm.py:417: UserWarning: using dhist requires you to install the `pickleshare` library.
+  self.shell.db[&#39;dhist&#39;] = compress_dhist(dhist)[-100:]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://pypi.ngc.nvidia.com
+Requirement already satisfied: torch in /usr/local/lib/python3.10/dist-packages (from -r requirements.txt (line 1)) (2.3.0a0+ebedce2)
+Requirement already satisfied: torchvision in /usr/local/lib/python3.10/dist-packages (from -r requirements.txt (line 2)) (0.18.0a0)
+Requirement already satisfied: filelock in /usr/local/lib/python3.10/dist-packages (from torch-&gt;-r requirements.txt (line 1)) (3.13.1)
+Requirement already satisfied: typing-extensions&gt;=4.8.0 in /usr/local/lib/python3.10/dist-packages (from torch-&gt;-r requirements.txt (line 1)) (4.9.0)
+Requirement already satisfied: sympy in /usr/local/lib/python3.10/dist-packages (from torch-&gt;-r requirements.txt (line 1)) (1.12)
+Requirement already satisfied: networkx in /usr/local/lib/python3.10/dist-packages (from torch-&gt;-r requirements.txt (line 1)) (2.6.3)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch-&gt;-r requirements.txt (line 1)) (3.1.3)
+Requirement already satisfied: fsspec in /usr/local/lib/python3.10/dist-packages (from torch-&gt;-r requirements.txt (line 1)) (2023.12.2)
+Requirement already satisfied: numpy in /usr/local/lib/python3.10/dist-packages (from torchvision-&gt;-r requirements.txt (line 2)) (1.24.4)
+Requirement already satisfied: requests in /usr/local/lib/python3.10/dist-packages (from torchvision-&gt;-r requirements.txt (line 2)) (2.31.0)
+Requirement already satisfied: pillow!=8.3.*,&gt;=5.3.0 in /usr/local/lib/python3.10/dist-packages (from torchvision-&gt;-r requirements.txt (line 2)) (10.2.0)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /usr/local/lib/python3.10/dist-packages (from jinja2-&gt;torch-&gt;-r requirements.txt (line 1)) (2.1.4)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/local/lib/python3.10/dist-packages (from requests-&gt;torchvision-&gt;-r requirements.txt (line 2)) (3.3.2)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.10/dist-packages (from requests-&gt;torchvision-&gt;-r requirements.txt (line 2)) (3.6)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests-&gt;torchvision-&gt;-r requirements.txt (line 2)) (1.26.18)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests-&gt;torchvision-&gt;-r requirements.txt (line 2)) (2024.2.2)
+Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.10/dist-packages (from sympy-&gt;torch-&gt;-r requirements.txt (line 1)) (1.3.0)
+<span class=" -Color -Color-Yellow">WARNING: Running pip as the &#39;root&#39; user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv</span>
+Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="method-1-default-hooks">
+<h2>Method 1: Default Hooks<a class="headerlink" href="#method-1-default-hooks" title="Permalink to this heading"></a></h2>
+<p>This is the conventional way of defining hooks for model loading and prediction, which uses the <code class="docutils literal notranslate"><span class="pre">hooks/load.py</span></code> and <code class="docutils literal notranslate"><span class="pre">hooks/predict.py</span></code> files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s1">&#39;torch-cifar10-demo&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Create a model version under development
+!mlsteam-model-cli dev mv add-local \
+    --model-name &quot;{MODEL_NAME}&quot; \
+    --version-name v1 \
+    --hooks-dir hooks \
+    --src-dir . \
+    --submodel main model \
+    --manifest manifest.json \
+    -X .ipynb_checkpoints
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-04-26 08:06:19 mlsteam-model-sdk [WARNING]: &#39;dev-c06cf915&#39;
+Generating dev mv record vuuid=dev-c06cf915...
+Generating archive at /root/.mlsteam-model-sdk/models/download/dev-c06cf915.mlarchive...
+Extracting archive at /root/.mlsteam-model-sdk/models/extract/dev-c06cf915...
+Done.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The new model version should be listed here</span>
+<span class="o">!</span>mlsteam-model-cli<span class="w"> </span>mv<span class="w"> </span>list-local
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total 1  dev 1
+
+  muuid         model_name           vuuid       version_name     puuid     packaged   encrypted         download_time       
+=============================================================================================================================
+__local__   *torch-cifar10-demo   dev-c06cf915   *v1            __local__   True       False       2024-04-26T08:06:19.725841
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the model version</span>
+<span class="kn">from</span> <span class="nn">mlsteam_model_sdk.sdk.model</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="n">sdk_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+<span class="n">mv</span> <span class="o">=</span> <span class="n">sdk_model</span><span class="o">.</span><span class="n">load_model_version</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">MODEL_NAME</span><span class="p">,</span> <span class="n">version_name</span><span class="o">=</span><span class="s1">&#39;v1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make prediction</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;dataset/samples/samples.pt&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">]))</span>
+<span class="n">mv</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([2, 1, 8, 8]), [&#39;bird&#39;, &#39;car&#39;, &#39;ship&#39;, &#39;ship&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="method-2-custom-hooks">
+<h2>Method 2: Custom Hooks<a class="headerlink" href="#method-2-custom-hooks" title="Permalink to this heading"></a></h2>
+<p>This method allows for specifying hook function defined in other places (E.g., <code class="docutils literal notranslate"><span class="pre">my_hooks.py</span></code> in this example), as long as the defining Python file is included in the source directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Create a model version under development
+!mlsteam-model-cli dev mv add-local \
+    --model-name &quot;{MODEL_NAME}&quot; \
+    --version-name v2 \
+    --hooks-dir &quot;&quot; \
+    --src-dir . \
+    --submodel main model \
+    --manifest manifest-custom-hooks.json \
+    -X hooks \
+    -X .ipynb_checkpoints
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-04-26 08:06:22 mlsteam-model-sdk [WARNING]: &#39;dev-46674f24&#39;
+Generating dev mv record vuuid=dev-46674f24...
+Generating archive at /root/.mlsteam-model-sdk/models/download/dev-46674f24.mlarchive...
+Extracting archive at /root/.mlsteam-model-sdk/models/extract/dev-46674f24...
+Done.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the model version and make prediction</span>
+<span class="c1"># NOTE: non-default hooks requires specifying `service_name` explicitly</span>
+<span class="k">with</span> <span class="n">sdk_model</span><span class="o">.</span><span class="n">load_model_version</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">MODEL_NAME</span><span class="p">,</span> <span class="n">version_name</span><span class="o">=</span><span class="s1">&#39;v2&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mv</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">service_name</span><span class="o">=</span><span class="s1">&#39;classify&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([2, 1, 8, 8]), [&#39;bird&#39;, &#39;car&#39;, &#39;ship&#39;, &#39;ship&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="method-3-built-in-hooks">
+<h2>Method 3: Built-in Hooks<a class="headerlink" href="#method-3-built-in-hooks" title="Permalink to this heading"></a></h2>
+<p>This method allos for specifying hooks in manifest without writing hook files.</p>
+<p>Below it loads the model and make prediction on CPU. To run on GPU, modify the <code class="docutils literal notranslate"><span class="pre">device</span></code> property to <code class="docutils literal notranslate"><span class="pre">cuda</span></code> within <code class="docutils literal notranslate"><span class="pre">manifest-builtin-hooks.json</span></code>, and transfer the input tensor to GPU.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Create a model version under development
+!mlsteam-model-cli dev mv add-local \
+    --model-name &quot;{MODEL_NAME}&quot; \
+    --version-name v3 \
+    --hooks-dir &quot;&quot; \
+    --src-dir . \
+    --submodel main model \
+    --manifest manifest-builtin-hooks.json \
+    -X hooks \
+    -X .ipynb_checkpoints
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-04-26 08:06:22 mlsteam-model-sdk [WARNING]: &#39;dev-22667e89&#39;
+Generating dev mv record vuuid=dev-22667e89...
+Generating archive at /root/.mlsteam-model-sdk/models/download/dev-22667e89.mlarchive...
+Extracting archive at /root/.mlsteam-model-sdk/models/extract/dev-22667e89...
+Done.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the model version and make prediction</span>
+<span class="c1"># NOTE: non-default hooks requires specifying `service_name` explicitly</span>
+<span class="k">with</span> <span class="n">sdk_model</span><span class="o">.</span><span class="n">load_model_version</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">MODEL_NAME</span><span class="p">,</span> <span class="n">version_name</span><span class="o">=</span><span class="s1">&#39;v3&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mv</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">service_name</span><span class="o">=</span><span class="s1">&#39;classify&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;class_ids&#39;: tensor([2, 1, 8, 8]), &#39;probs&#39;: tensor([2.4466, 7.6294, 3.9962, 5.4334], grad_fn=&lt;MaxBackward0&gt;), &#39;class_names&#39;: [&#39;bird&#39;, &#39;car&#39;, &#39;ship&#39;, &#39;ship&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulate-model-encryption">
+<h2>Simulate Model Encryption 🔐<a class="headerlink" href="#simulate-model-encryption" title="Permalink to this heading"></a></h2>
+<p>We can also simulate a model version packaged in encryption mode locally after everything works fine in plaintext mode.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Convert a model version to simulated encryption mode
+!mlsteam-model-cli dev mv update-local \
+    --model-name &quot;{MODEL_NAME}&quot; \
+    --version-name v3 \
+    --encrypted \
+    --sync
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Updating dev mv record vuud=dev-22667e89...
+Generating archive at /root/.mlsteam-model-sdk/models/download/dev-22667e89-enc.mlarchive...
+Extracting archive at /root/.mlsteam-model-sdk/models/extract/dev-22667e89...
+Done.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List the model versions again</span>
+<span class="o">!</span>mlsteam-model-cli<span class="w"> </span>mv<span class="w"> </span>list-local
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total 3  dev 3
+
+  muuid         model_name           vuuid       version_name     puuid     packaged   encrypted         download_time       
+=============================================================================================================================
+__local__   *torch-cifar10-demo   dev-c06cf915   *v1            __local__   True       False       2024-04-26T08:06:19.725841
+__local__   *torch-cifar10-demo   dev-46674f24   *v2            __local__   True       False       2024-04-26T08:06:22.381246
+__local__   *torch-cifar10-demo   dev-22667e89   *v3            __local__   True       True        2024-04-26T08:06:22.847044
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the model version and make prediction again</span>
+<span class="k">with</span> <span class="n">sdk_model</span><span class="o">.</span><span class="n">load_model_version</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">MODEL_NAME</span><span class="p">,</span> <span class="n">version_name</span><span class="o">=</span><span class="s1">&#39;v3&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mv</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">service_name</span><span class="o">=</span><span class="s1">&#39;classify&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">ds</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;class_ids&#39;: tensor([2, 1, 8, 8]), &#39;probs&#39;: tensor([2.4466, 7.6294, 3.9962, 5.4334], grad_fn=&lt;MaxBackward0&gt;), &#39;class_names&#39;: [&#39;bird&#39;, &#39;car&#39;, &#39;ship&#39;, &#39;ship&#39;]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../model_developer/examples/pytorch_cifar10.html" class="btn btn-neutral float-left" title="PyTorch Cifar10 Image Classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../cli.html" class="btn btn-neutral float-right" title="CLI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, MyelinTek Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

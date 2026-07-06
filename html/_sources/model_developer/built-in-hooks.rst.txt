@@ -1,0 +1,46 @@
+Built-in Hooks
+==============
+
+Loaders
+-------
+
+PyTorchLoader
+~~~~~~~~~~~~~
+
+It loads a PyTorch model from state dicts.
+It reads all state dict files with ``.pt`` or ``.pth`` suffixes within the submodel directory.
+
+Properties:
+
+model_cls_file
+    Path of model definition Python file relative to the ``src`` directory
+
+model_cls_name
+    Model class name
+
+device
+    Destination device of loaded model (E.g., 'cpu', 'cuda', 'cuda:0').
+    It can be skipped when the model was trained on CPU and is to be loaded on CPU.
+
+Predictors
+----------
+
+PyTorchClassifier
+~~~~~~~~~~~~~~~~~
+
+It provides a PyTorch multi-class classifier.
+It supports making (batched) prediction from a Tortch tensor by a single model.
+
+Properties:
+
+submodel
+    Name of submodel to use
+
+classes
+    A list of class names. The predictor will return class names when ``classes`` is provided.
+
+batch
+    Enable batch prediction (default: ``false``)
+
+output_class_dim
+    class probability dimension in the output tensor. It defaults to ``0`` when batch is disabled and ``1`` otherwise.

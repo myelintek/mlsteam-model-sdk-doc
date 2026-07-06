@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MLSteam Model Archive Specification (v2024.1) &mdash; MLSteam Model SDK 0.8.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Examples" href="../examples/index.html" />
+    <link rel="prev" title="Built-in Hooks" href="../built-in-hooks.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            MLSteam Model SDK
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">README</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Model Developer’s Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../built-in-hooks.html">Built-in Hooks</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MLSteam Model Archive Specification (v2024.1)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#internal-directory-structure">Internal directory structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#models">Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hooks">Hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#file-checking">File checking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manifest">Manifest</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#model-archive-specification">Model Archive Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#manifest-json-schema">Manifest JSON Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk.html">SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release.html">Releases</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MLSteam Model SDK</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Model Developer’s Guide</a></li>
+      <li class="breadcrumb-item active">MLSteam Model Archive Specification (v2024.1)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/model_developer/mlarchive_spec/v2024.1.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mlsteam-model-archive-specification-v2024-1">
+<h1>MLSteam Model Archive Specification (v2024.1)<a class="headerlink" href="#mlsteam-model-archive-specification-v2024-1" title="Permalink to this heading"></a></h1>
+<p>A model archive encapsulates one or multiple models. It is a zip-compressed file with extension <code class="docutils literal notranslate"><span class="pre">.mlarchive</span></code>.</p>
+<section id="internal-directory-structure">
+<h2>Internal directory structure<a class="headerlink" href="#internal-directory-structure" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>models/
+  └ submodel files
+[hooks/]
+  └ hook files
+[src/]
+  └ source files
+[file-check.json]
+manifest.json
+</pre></div>
+</div>
+</section>
+<section id="models">
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this heading"></a></h2>
+<p>All model files should be saved under the <code class="docutils literal notranslate"><span class="pre">models</span></code> directory. These are the main files to protect and are not extracted in persistent storage when in-memory model extraction is enforced.</p>
+<p><strong>(Since v2024.1)</strong> It is encouraged to save model files under <code class="docutils literal notranslate"><span class="pre">models/&lt;sub_model_name&gt;</span></code> directory for different submodels; <code class="docutils literal notranslate"><span class="pre">&lt;submodel_name&gt;</span></code> should be defined in <code class="docutils literal notranslate"><span class="pre">models[].name</span></code> within manifest. Submodel directories are required for submodel-specific loader hooks.</p>
+</section>
+<section id="hooks">
+<h2>Hooks<a class="headerlink" href="#hooks" title="Permalink to this heading"></a></h2>
+<p>A hook is a specialized Python function for certain tasks. There are two kinds of hooks:</p>
+<ol class="arabic simple">
+<li><p>A <em>loader hook</em> loads one or multiple packaged submodels.</p></li>
+<li><p>A <em>predictor hook</em> makes inference.</p></li>
+</ol>
+<p>Hooks can be specified in these locations:</p>
+<ol class="arabic">
+<li><p>Within the <code class="docutils literal notranslate"><span class="pre">hooks</span></code> directory:</p>
+<ul>
+<li><p>A <em>loader hook</em> is specified within <code class="docutils literal notranslate"><span class="pre">hooks/load.py</span></code>.</p>
+<ul class="simple">
+<li><p>It should contain a function <code class="docutils literal notranslate"><span class="pre">load(*args,</span> <span class="pre">**kwargs)</span></code> which loads and returns submodel(s).</p></li>
+</ul>
+<blockquote>
+<div><p><strong>(Since v2024.1)</strong> It is encouraged to return the submodel(s) as a dictionary which maps submodel names as defined in <code class="docutils literal notranslate"><span class="pre">models[].name</span></code> within manifest to the loaded submodel objects. This return format is required if there is any <em>loader hook</em> specified elsewhere.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Arguments passed by SDK:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">env</span></code>: MLSteam environment variables</p></li>
+<li><p><strong>(Since v2024.1)</strong> <code class="docutils literal notranslate"><span class="pre">submodels</span></code>: restricting the submodel(s) to load if provided. It is a single submodel name or a list of submodel names. Empty values mean to load all submodel(s). Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>(Since v2024.1)</strong> <code class="docutils literal notranslate"><span class="pre">model_file_loader</span></code>: a file loader for accessing extracted model files on-disk or in-memory.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>A <em>predictor hook</em> is specified within <code class="docutils literal notranslate"><span class="pre">hooks/predict.py</span></code>.</p>
+<ul>
+<li><p>It should contain a function <code class="docutils literal notranslate"><span class="pre">predict(*args,</span> <span class="pre">**kwargs)</span></code> which accepts inputs and returns the inference results.</p></li>
+<li><p>Arguments passed by SDK:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">env</span></code>: MLSteam environment variables</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">env['MLSTEAM_MODEL_DIR']</span></code>: The package’s <code class="docutils literal notranslate"><span class="pre">models</span></code> directory.</p>
+<blockquote>
+<div><p><strong>(Since v2024.1)</strong> The value could be <code class="docutils literal notranslate"><span class="pre">None</span></code> if in-memory model decryption is enforced.</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code>: the submodel(s) returned by <code class="docutils literal notranslate"><span class="pre">load()</span></code> and other loader hooks if exist</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inputs</span></code>: inference inputs</p></li>
+<li><p><strong>(Since v2024.1)</strong> <code class="docutils literal notranslate"><span class="pre">service_name</span></code>: the name of inference service to invoke if provided. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>(Since v2024.1)</strong> Within manifest:</p>
+<ul>
+<li><p>A submodal-specific <em>loader hook</em> is specified within <code class="docutils literal notranslate"><span class="pre">models[].loader</span></code>. Valid values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">models[].loader.built-in</span></code> as the name of a built-in loader and <code class="docutils literal notranslate"><span class="pre">models[].loader.&lt;property_name&gt;</span></code> as the properties required by that built-in loader.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">models[].loader</span></code> as a relative path to the target Python file residing in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory. It should contain a function <code class="docutils literal notranslate"><span class="pre">load(*args,</span> <span class="pre">**kwargs)</span></code> which loads the corresponding submodel and returns the submodel object. SDK will pass the value of <code class="docutils literal notranslate"><span class="pre">[models[].name]</span></code> as the <code class="docutils literal notranslate"><span class="pre">submodels</span></code> argument. Refer to the <em>loader hook</em> specified within <code class="docutils literal notranslate"><span class="pre">hooks/load.py</span></code> for other function arguments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">models[].loader.file</span></code> as a relative path to the target Python file residing in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory, and <code class="docutils literal notranslate"><span class="pre">models[].loader.function</span></code> as the name of function to call during loading. It is allowed to have one or multiple dots <code class="docutils literal notranslate"><span class="pre">.</span></code> to specify a static loader function within a class, such as <code class="docutils literal notranslate"><span class="pre">MyClass.loaders.load_tokenizer</span></code>.</p>
+<blockquote>
+<div><p>This format enables customizing the function name, and the function signature and passed values are the same as <code class="docutils literal notranslate"><span class="pre">load(*args,</span> <span class="pre">**kwargs)</span></code> mentioned previously.</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p>An inference-service-specific <em>predictor hook</em> is specified within <code class="docutils literal notranslate"><span class="pre">services[].predictor</span></code>. Valid values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">services[].predictor.built-in</span></code> as the name of a built-in predictor and <code class="docutils literal notranslate"><span class="pre">services[].predictor.&lt;property_name&gt;</span></code> as the properties required by that built-in predictor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">services[].predictor</span></code> as a relative path to the target Python file residing in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory. It should contain a function <code class="docutils literal notranslate"><span class="pre">predict(*args,</span> <span class="pre">**kwargs)</span></code> which returns the inference results. SDK will pass the value of <code class="docutils literal notranslate"><span class="pre">services[].name</span></code> as the <code class="docutils literal notranslate"><span class="pre">service_name</span></code> argument. Refer to the <em>predictor hook</em> specified within <code class="docutils literal notranslate"><span class="pre">hooks/predict.py</span></code> for other function arguments.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">services[].predictor.file</span></code> as a relative path to the target Python file residing in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory, and <code class="docutils literal notranslate"><span class="pre">services[].predictor.function</span></code> as the name of function to call during inferencing. It is allowed to have one or multiple dots <code class="docutils literal notranslate"><span class="pre">.</span></code> to specify a static predictor function within a class, such as <code class="docutils literal notranslate"><span class="pre">MyClass.predictors.classify</span></code>.</p>
+<blockquote>
+<div><p>This format enables customizing the function name, and the function signature and passed values are the same as <code class="docutils literal notranslate"><span class="pre">predict(*args,</span> <span class="pre">**kwargs)</span></code> mentioned previously.</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="source">
+<h2>Source<a class="headerlink" href="#source" title="Permalink to this heading"></a></h2>
+<p><strong>(Since v2024.1)</strong> The <code class="docutils literal notranslate"><span class="pre">src</span></code> directory may contain the files needed to support model loading and making inference.</p>
+</section>
+<section id="file-checking">
+<h2>File checking<a class="headerlink" href="#file-checking" title="Permalink to this heading"></a></h2>
+<p><strong>(Since v2024.1)</strong> <code class="docutils literal notranslate"><span class="pre">file-check.json</span></code> records information needed in file integrity check. This file is auto-generated during model archiving.</p>
+</section>
+<section id="manifest">
+<h2>Manifest<a class="headerlink" href="#manifest" title="Permalink to this heading"></a></h2>
+<p>All settings should be saved in the <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code> file.</p>
+<p>Settings (optional fields could be <code class="docutils literal notranslate"><span class="pre">null</span></code> or without such an entry):</p>
+<ul>
+<li><p><strong>(Since v2024.1)</strong> <strong>schema</strong> (<em>Optional[str]</em>): The model archive spec version. Valid values are <code class="docutils literal notranslate"><span class="pre">&quot;v2024.1&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;v2023.1&quot;</span></code>. The schema is interpreted as <code class="docutils literal notranslate"><span class="pre">&quot;v2023.1&quot;</span></code> if this field is ommited.</p></li>
+<li><p><strong>(Since v2024.1)</strong> <strong>name</strong> (<em>str</em>): The default model name, used when a model name is not retrieved from system. E.g., importing a local model archive.</p></li>
+<li><p><strong>(Since v2024.1)</strong> <strong>version</strong> (<em>str</em>): The default model version, used when a version name is not retrieved from system. E.g., importing a local model archive.</p></li>
+<li><p><strong>(Since v2024.1)</strong> <strong>in_memory_model_extraction</strong> (<em>Optional[bool]</em>): The in-memory model extraction policy, effective only for encrypted model archives. Default: <code class="docutils literal notranslate"><span class="pre">true</span></code> for encrypted model archives with spec version &gt;= <code class="docutils literal notranslate"><span class="pre">&quot;v2024.1&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p></li>
+<li><p><strong>(Since v2024.1)</strong> <strong>file_integrity_check</strong> (<em>Optional[dict]</em>): The file integrity check settings.</p>
+<ul class="simple">
+<li><p><strong>file_integrity_check.models</strong> (<em>Optional[str]</em>): The file integrity check policy for model files (all files under the <code class="docutils literal notranslate"><span class="pre">models</span></code> directory). Valid values are <code class="docutils literal notranslate"><span class="pre">&quot;skip&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;permissive&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;enforce&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;strictly-enforce&quot;</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">&quot;strictly-enforce&quot;</span></code> for model archives with spec version &gt;= <code class="docutils literal notranslate"><span class="pre">&quot;v2024.1&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;skip&quot;</span></code> otherwise.</p></li>
+<li><p><strong>file_integrity_check.hooks</strong> (<em>Optional[str]</em>): The file integrity check policy for hook files (all files under the <code class="docutils literal notranslate"><span class="pre">hooks</span></code> directory, specified by <code class="docutils literal notranslate"><span class="pre">models[].loader</span></code>, and specified by <code class="docutils literal notranslate"><span class="pre">services[].predictor</span></code>). Refer to <code class="docutils literal notranslate"><span class="pre">file_integrity_check.models</span></code> for valid values. Default: <code class="docutils literal notranslate"><span class="pre">&quot;strictly-enforce&quot;</span></code> for model archives with spec version &gt;= <code class="docutils literal notranslate"><span class="pre">&quot;v2024.1&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;skip&quot;</span></code> otherwise.</p></li>
+<li><p><strong>file_integrity_check.src</strong> (<em>Optional[str]</em>): The file integrity check policy for all other files under the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory not specified by <code class="docutils literal notranslate"><span class="pre">models[].loader</span></code> or <code class="docutils literal notranslate"><span class="pre">services[].predictor</span></code>. Refer to <code class="docutils literal notranslate"><span class="pre">file_integrity_check.models</span></code> for valid values. Default: <code class="docutils literal notranslate"><span class="pre">&quot;skip&quot;</span></code>.</p></li>
+<li><p><strong>file_integrity_check.manifest</strong> (<em>Optional[str]</em>): The file integrity check policy for manifest. Refer to <code class="docutils literal notranslate"><span class="pre">file_integrity_check.models</span></code> for valid values. Default: <code class="docutils literal notranslate"><span class="pre">&quot;strictly-enforce&quot;</span></code> for model archives with spec version &gt;= <code class="docutils literal notranslate"><span class="pre">&quot;v2024.1&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;skip&quot;</span></code> otherwise.</p></li>
+</ul>
+</li>
+<li><p><strong>models[]</strong> (<em>list</em>): A list of submodels.</p>
+<ul>
+<li><p><strong>models[].name</strong> (<em>str</em>): A human-readable submodel name. It is independent of MLSteam server’s model name.</p></li>
+<li><p><strong>models[].version</strong> (<em>Optional[str]</em>): A human-readable submodel version. It is independent of MLSteam server’s model version.</p>
+<blockquote>
+<div><p><strong>(Since v2024.1)</strong> This field becomes obsolete and has no effects.</p>
+</div></blockquote>
+</li>
+<li><p><strong>models[].description</strong> (<em>Optional[str]</em>): A human-readable submodel description.</p></li>
+<li><p><strong>models[].framework</strong> (<em>Optional[str]</em>): The submodel’s construction framework. It should be one of <code class="docutils literal notranslate"><span class="pre">&quot;tensorflow&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;tensorflow.keras&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;pytorch&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;pytorch.lightning&quot;</span></code>.</p>
+<blockquote>
+<div><p><strong>(Since v2024.1)</strong> This field becomes optional.</p>
+</div></blockquote>
+</li>
+<li><p><strong>(Since v2024.1)</strong> <strong>models[].loader</strong> (<em>Optional[str | dict]</em>): The submodel’s loader hook. It can be relative path to the target Python file residing in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory or a dict with the following properties.</p>
+<ul class="simple">
+<li><p><strong>models[].loader.built-in</strong> (<em>Optional[str]</em>): The built-in loader name and <strong>models[].loader.&lt;property_name&gt;</strong> (<em>Optional</em>): The properties required by the built-in loader.</p></li>
+<li><p><strong>models[].loader.file</strong> (<em>Optional[str]</em>): The relative path to the target Python file residing in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory and optionally <strong>models[].loader.function</strong> (<em>Optional[str]</em>): the name of function to call located in <code class="docutils literal notranslate"><span class="pre">models[].loader.file</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>models[].enc_model_cleanup</strong> (<em>Optional[str]</em>): The time to clean up decrypted model files. Valid values are <code class="docutils literal notranslate"><span class="pre">&quot;never&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;after-load&quot;</span></code>. This field is effective only for encrypted model archives and where in-memory model decryption is not enforced. Default: <code class="docutils literal notranslate"><span class="pre">&quot;after-load&quot;</span></code> unless specified in SDK’s configuration.</p></li>
+<li><p><strong>models[].enc_model_cleanup_files[]</strong> (<em>Optional[list[str]]</em>): A list of the relative paths within archive to clean up all residing model files. This field is refernced along with <code class="docutils literal notranslate"><span class="pre">models[].enc_model_cleanup</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">[&quot;models&quot;]</span></code>.</p></li>
+<li><p>~~<strong>models[].inputs</strong>~~ (<em>Optional[list]</em>): The submodel input specification.</p>
+<blockquote>
+<div><p><strong>(Since v2024.1)</strong> This field becomes obselete and has no effects.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>~~<strong>models[].inputs[].name</strong>~~ (<em>str</em>): The input name.</p></li>
+<li><p>~~<strong>models[].inputs[].type</strong>~~ (<em>str</em>): The input type with Python’s type annotation.</p></li>
+</ul>
+</li>
+<li><p>~~<strong>models[].outputs</strong>~~ (<em>Optional[list]</em>): The model output specification.</p>
+<blockquote>
+<div><p><strong>(Since v2024.1)</strong> This field becomes obsolete and has no effects.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>~~<strong>models[].outputs[].name</strong>~~ (<em>str</em>): The output name.</p></li>
+<li><p>~~<strong>models[].outputs[].type</strong>~~ (<em>str</em>): The output type with Python’s type annotation.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>(Since v2024.1)</strong> <strong>services[]</strong> (<em>list</em>): A list of inference services.</p>
+<ul class="simple">
+<li><p><strong>services[].name</strong> (<em>str</em>): The inference service name.</p></li>
+<li><p><strong>services[].predictor</strong> (<em>Optional[str | dict]</em>): The inference service’s predictor hook. It can be relative path to the target Python file residing in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory or a dict with the following properties:</p>
+<ul>
+<li><p><strong>services[].predictor.built-in</strong> (<em>Optional[str]</em>): The built-in predictor name and <strong>services[].predictor.&lt;property_name&gt;</strong> (<em>Optiona</em>l): the properties required by the built-in predictor.</p></li>
+<li><p><strong>services[].predictor.file</strong> (<em>Optional[str]</em>): The relative path to the target Python file residing in the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory and optionally <strong>services[].predictor.function</strong> (<em>Optional[str]</em>): the name of function to call located in <code class="docutils literal notranslate"><span class="pre">services[].predictor.file</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../built-in-hooks.html" class="btn btn-neutral float-left" title="Built-in Hooks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../examples/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, MyelinTek Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -6,5 +6,9 @@ SDK
 
    mlsteam_model_sdk.core.exceptions
    mlsteam_model_sdk.core.registry
+   mlsteam_model_sdk.sdk.helper.loader
+   mlsteam_model_sdk.sdk.helper.loader.torch
+   mlsteam_model_sdk.sdk.helper.predictor
+   mlsteam_model_sdk.sdk.helper.predictor.torch
    mlsteam_model_sdk.sdk.model
    mlsteam_model_sdk.utils.config

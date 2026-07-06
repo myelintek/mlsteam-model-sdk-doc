@@ -1,0 +1,109 @@
+# MLSteam Model Archive Specification (v2024.1)
+
+A model archive encapsulates one or multiple models. It is a zip-compressed file with extension `.mlarchive`.
+
+## Internal directory structure
+
+```
+models/
+  └ submodel files
+[hooks/]
+  └ hook files
+[src/]
+  └ source files
+[file-check.json]
+manifest.json
+```
+
+## Models
+
+All model files should be saved under the `models` directory. These are the main files to protect and are not extracted in persistent storage when in-memory model extraction is enforced.
+
+**(Since v2024.1)** It is encouraged to save model files under `models/<sub_model_name>` directory for different submodels; `<submodel_name>` should be defined in `models[].name` within manifest. Submodel directories are required for submodel-specific loader hooks.
+
+## Hooks
+
+A hook is a specialized Python function for certain tasks. There are two kinds of hooks:
+
+1. A *loader hook* loads one or multiple packaged submodels.
+1. A *predictor hook* makes inference.
+
+Hooks can be specified in these locations:
+
+1. Within the `hooks` directory:
+   - A *loader hook* is specified within `hooks/load.py`.
+     - It should contain a function `load(*args, **kwargs)` which loads and returns submodel(s).
+	 > **(Since v2024.1)** It is encouraged to return the submodel(s) as a dictionary which maps submodel names as defined in `models[].name` within manifest to the loaded submodel objects. This return format is required if there is any *loader hook* specified elsewhere. 
+     - Arguments passed by SDK:
+       - `env`: MLSteam environment variables
+	   - **(Since v2024.1)** `submodels`: restricting the submodel(s) to load if provided. It is a single submodel name or a list of submodel names. Empty values mean to load all submodel(s). Default: `None`.
+	   - **(Since v2024.1)** `model_file_loader`: a file loader for accessing extracted model files on-disk or in-memory.
+   - A *predictor hook* is specified within `hooks/predict.py`.
+     - It should contain a function `predict(*args, **kwargs)` which accepts inputs and returns the inference results. 
+     - Arguments passed by SDK:
+       - `env`: MLSteam environment variables
+	     - `env['MLSTEAM_MODEL_DIR']`: The package's `models` directory.
+		   > **(Since v2024.1)** The value could be `None` if in-memory model decryption is enforced.
+       - `model`: the submodel(s) returned by `load()` and other loader hooks if exist
+       - `inputs`: inference inputs
+	   - **(Since v2024.1)** `service_name`: the name of inference service to invoke if provided. Default: `None`.
+1. **(Since v2024.1)** Within manifest:
+   - A submodal-specific *loader hook* is specified within `models[].loader`. Valid values:
+     - `models[].loader.built-in` as the name of a built-in loader and `models[].loader.<property_name>` as the properties required by that built-in loader.
+     - `models[].loader` as a relative path to the target Python file residing in the `src` directory. It should contain a function `load(*args, **kwargs)` which loads the corresponding submodel and returns the submodel object. SDK will pass the value of `[models[].name]` as the `submodels` argument. Refer to the *loader hook* specified within `hooks/load.py` for other function arguments.
+     - `models[].loader.file` as a relative path to the target Python file residing in the `src` directory, and `models[].loader.function` as the name of function to call during loading. It is allowed to have one or multiple dots `.` to specify a static loader function within a class, such as `MyClass.loaders.load_tokenizer`.
+       > This format enables customizing the function name, and the function signature and passed values are the same as `load(*args, **kwargs)` mentioned previously.
+   - An inference-service-specific *predictor hook* is specified within `services[].predictor`. Valid values:
+     - `services[].predictor.built-in` as the name of a built-in predictor and `services[].predictor.<property_name>` as the properties required by that built-in predictor.
+     - `services[].predictor` as a relative path to the target Python file residing in the `src` directory. It should contain a function `predict(*args, **kwargs)` which returns the inference results. SDK will pass the value of `services[].name` as the `service_name` argument. Refer to the *predictor hook* specified within `hooks/predict.py` for other function arguments.
+     - `services[].predictor.file` as a relative path to the target Python file residing in the `src` directory, and `services[].predictor.function` as the name of function to call during inferencing. It is allowed to have one or multiple dots `.` to specify a static predictor function within a class, such as `MyClass.predictors.classify`. 
+       > This format enables customizing the function name, and the function signature and passed values are the same as `predict(*args, **kwargs)` mentioned previously.
+
+## Source
+
+**(Since v2024.1)** The `src` directory may contain the files needed to support model loading and making inference.
+
+## File checking
+
+**(Since v2024.1)** `file-check.json` records information needed in file integrity check. This file is auto-generated during model archiving.
+
+## Manifest
+
+All settings should be saved in the `manifest.json` file.
+
+Settings (optional fields could be `null` or without such an entry):
+
+- **(Since v2024.1)** **schema** (*Optional[str]*): The model archive spec version. Valid values are `"v2024.1"` and `"v2023.1"`. The schema is interpreted as `"v2023.1"` if this field is ommited.
+- **(Since v2024.1)** **name** (*str*): The default model name, used when a model name is not retrieved from system. E.g., importing a local model archive.
+- **(Since v2024.1)** **version** (*str*): The default model version, used when a version name is not retrieved from system. E.g., importing a local model archive.
+- **(Since v2024.1)** **in_memory_model_extraction** (*Optional[bool]*): The in-memory model extraction policy, effective only for encrypted model archives. Default: `true` for encrypted model archives with spec version >= `"v2024.1"`, `false` otherwise.
+- **(Since v2024.1)** **file_integrity_check** (*Optional[dict]*): The file integrity check settings.
+  - **file_integrity_check.models** (*Optional[str]*): The file integrity check policy for model files (all files under the `models` directory). Valid values are `"skip"`, `"permissive"`, `"enforce"`, `"strictly-enforce"`. Default: `"strictly-enforce"` for model archives with spec version >= `"v2024.1"`, `"skip"` otherwise.
+  - **file_integrity_check.hooks** (*Optional[str]*): The file integrity check policy for hook files (all files under the `hooks` directory, specified by `models[].loader`, and specified by `services[].predictor`). Refer to `file_integrity_check.models` for valid values. Default: `"strictly-enforce"` for model archives with spec version >= `"v2024.1"`, `"skip"` otherwise.
+  - **file_integrity_check.src** (*Optional[str]*): The file integrity check policy for all other files under the `src` directory not specified by `models[].loader` or `services[].predictor`. Refer to `file_integrity_check.models` for valid values. Default: `"skip"`.
+  - **file_integrity_check.manifest** (*Optional[str]*): The file integrity check policy for manifest. Refer to `file_integrity_check.models` for valid values. Default: `"strictly-enforce"` for model archives with spec version >= `"v2024.1"`, `"skip"` otherwise.
+- **models[]** (*list*): A list of submodels.
+  - **models[].name** (*str*): A human-readable submodel name. It is independent of MLSteam server's model name.
+  - **models[].version** (*Optional[str]*): A human-readable submodel version. It is independent of MLSteam server's model version.
+    > **(Since v2024.1)** This field becomes obsolete and has no effects.
+  - **models[].description** (*Optional[str]*): A human-readable submodel description.
+  - **models[].framework** (*Optional[str]*): The submodel's construction framework. It should be one of `"tensorflow"`, `"tensorflow.keras"`, `"pytorch"`, `"pytorch.lightning"`.
+    > **(Since v2024.1)** This field becomes optional.
+  - **(Since v2024.1)** **models[].loader** (*Optional[str | dict]*): The submodel's loader hook. It can be relative path to the target Python file residing in the `src` directory or a dict with the following properties.
+    - **models[].loader.built-in** (*Optional[str]*): The built-in loader name and **models[].loader.<property_name>** (*Optional*): The properties required by the built-in loader.
+    - **models[].loader.file** (*Optional[str]*): The relative path to the target Python file residing in the `src` directory and optionally **models[].loader.function** (*Optional[str]*): the name of function to call located in `models[].loader.file`.
+  - **models[].enc_model_cleanup** (*Optional[str]*): The time to clean up decrypted model files. Valid values are `"never"` and `"after-load"`. This field is effective only for encrypted model archives and where in-memory model decryption is not enforced. Default: `"after-load"` unless specified in SDK's configuration.
+  - **models[].enc_model_cleanup_files[]** (*Optional[list[str]]*): A list of the relative paths within archive to clean up all residing model files. This field is refernced along with `models[].enc_model_cleanup`. Default: `["models"]`.
+  - ~~**models[].inputs**~~ (*Optional[list]*): The submodel input specification.
+    > **(Since v2024.1)** This field becomes obselete and has no effects.
+    - ~~**models[].inputs[].name**~~ (*str*): The input name.
+    - ~~**models[].inputs[].type**~~ (*str*): The input type with Python's type annotation.
+  - ~~**models[].outputs**~~ (*Optional[list]*): The model output specification.
+    > **(Since v2024.1)** This field becomes obsolete and has no effects.
+    - ~~**models[].outputs[].name**~~ (*str*): The output name.
+    - ~~**models[].outputs[].type**~~ (*str*): The output type with Python's type annotation.
+- **(Since v2024.1)** **services[]** (*list*): A list of inference services.
+  - **services[].name** (*str*): The inference service name.
+  - **services[].predictor** (*Optional[str | dict]*): The inference service's predictor hook. It can be relative path to the target Python file residing in the `src` directory or a dict with the following properties:
+    - **services[].predictor.built-in** (*Optional[str]*): The built-in predictor name and **services[].predictor.<property_name>** (*Optiona*l): the properties required by the built-in predictor.
+    - **services[].predictor.file** (*Optional[str]*): The relative path to the target Python file residing in the `src` directory and optionally **services[].predictor.function** (*Optional[str]*): the name of function to call located in `services[].predictor.file`.

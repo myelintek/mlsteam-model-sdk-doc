@@ -1,0 +1,462 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "19cdf2b0",
+   "metadata": {},
+   "source": [
+    "# PyTorch Cifar10 Image Classification\n",
+    "\n",
+    "💡 This example demonstrates how to use *MLSteam Model SDK* (Archive `v2024.1`) to develop a Cifar10 model for image classification.\n",
+    "\n",
+    "📘 Cifar10 was introduced by Krizhevsky et al. in [Learning multiple layers of features from tiny images](https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf). The datasets are publicly available in the [author's site](https://www.cs.toronto.edu/~kriz/cifar.html) as well as through many popular ML framework libraries. The PyTorch model training code here originates from a [PyTorch tutorial](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html)."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cf712835",
+   "metadata": {},
+   "source": [
+    "## Prepare Files\n",
+    "\n",
+    "Download the `pytorch-cifar10-multiweights.zip` file and extract it.\n",
+    "\n",
+    "The extracted files include:\n",
+    "\n",
+    "```\n",
+    "pytorch-cifar10-multiweights/\n",
+    "  ├ dataset/\n",
+    "  │  └ samples/\n",
+    "  │    └ samples.pt  # a torch file containing 4 Cifar10 sample images\n",
+    "  ├ hooks/\n",
+    "  │  ├ load.py  # default loader hook \n",
+    "  │  └ predict.py  # default predictor hook\n",
+    "  ├ model/\n",
+    "  │  ├ cifar_model-1.pth  # 1st state dict file\n",
+    "  │  └ cifar_model-2.pth  # 2nd state dict file\n",
+    "  ├ manifest-builtin-hooks.json  # manifest file using built-in hooks\n",
+    "  ├ manifest-custom-hooks.json  # manifest file using custom hooks\n",
+    "  ├ manifest.json  # manifest file using default hooks\n",
+    "  ├ my_hooks.py  # custom hooks\n",
+    "  ├ requirements.txt  # Python package dependencies\n",
+    "  └ train_multi_weights.py  # Cifar10 model definition & training script\n",
+    "```\n",
+    "\n",
+    "Development typically starts with a model training script, which defines and trains the model from a training dataset. And they add manifest and optionally hook files for model packaging.\n",
+    "\n",
+    "This example includes more files than necessary for demonstrating 3 ways to definining hooks. It also saves the model in 2 state dict files to show how the SDK deals with multi-weight-file models."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8d8260bf",
+   "metadata": {},
+   "source": [
+    "## Install Packages\n",
+    "\n",
+    "1. Install `mlsteam-model-sdk` >= 0.7\n",
+    "1. Initilize SDK by `mlsteam-model-cli init -i`\n",
+    "1. Install themis by `mlsteam-model-cli install-themisdev`\n",
+    "1. Install cifar10 dependencies as follows."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "b5901ae4",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "/mlsteam/lab/pytorch-cifar10-multiweights\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/usr/local/lib/python3.10/dist-packages/IPython/core/magics/osm.py:417: UserWarning: using dhist requires you to install the `pickleshare` library.\n",
+      "  self.shell.db['dhist'] = compress_dhist(dhist)[-100:]\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Looking in indexes: https://pypi.org/simple, https://pypi.ngc.nvidia.com\n",
+      "Requirement already satisfied: torch in /usr/local/lib/python3.10/dist-packages (from -r requirements.txt (line 1)) (2.3.0a0+ebedce2)\n",
+      "Requirement already satisfied: torchvision in /usr/local/lib/python3.10/dist-packages (from -r requirements.txt (line 2)) (0.18.0a0)\n",
+      "Requirement already satisfied: filelock in /usr/local/lib/python3.10/dist-packages (from torch->-r requirements.txt (line 1)) (3.13.1)\n",
+      "Requirement already satisfied: typing-extensions>=4.8.0 in /usr/local/lib/python3.10/dist-packages (from torch->-r requirements.txt (line 1)) (4.9.0)\n",
+      "Requirement already satisfied: sympy in /usr/local/lib/python3.10/dist-packages (from torch->-r requirements.txt (line 1)) (1.12)\n",
+      "Requirement already satisfied: networkx in /usr/local/lib/python3.10/dist-packages (from torch->-r requirements.txt (line 1)) (2.6.3)\n",
+      "Requirement already satisfied: jinja2 in /usr/local/lib/python3.10/dist-packages (from torch->-r requirements.txt (line 1)) (3.1.3)\n",
+      "Requirement already satisfied: fsspec in /usr/local/lib/python3.10/dist-packages (from torch->-r requirements.txt (line 1)) (2023.12.2)\n",
+      "Requirement already satisfied: numpy in /usr/local/lib/python3.10/dist-packages (from torchvision->-r requirements.txt (line 2)) (1.24.4)\n",
+      "Requirement already satisfied: requests in /usr/local/lib/python3.10/dist-packages (from torchvision->-r requirements.txt (line 2)) (2.31.0)\n",
+      "Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in /usr/local/lib/python3.10/dist-packages (from torchvision->-r requirements.txt (line 2)) (10.2.0)\n",
+      "Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.10/dist-packages (from jinja2->torch->-r requirements.txt (line 1)) (2.1.4)\n",
+      "Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.10/dist-packages (from requests->torchvision->-r requirements.txt (line 2)) (3.3.2)\n",
+      "Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/dist-packages (from requests->torchvision->-r requirements.txt (line 2)) (3.6)\n",
+      "Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.10/dist-packages (from requests->torchvision->-r requirements.txt (line 2)) (1.26.18)\n",
+      "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.10/dist-packages (from requests->torchvision->-r requirements.txt (line 2)) (2024.2.2)\n",
+      "Requirement already satisfied: mpmath>=0.19 in /usr/local/lib/python3.10/dist-packages (from sympy->torch->-r requirements.txt (line 1)) (1.3.0)\n",
+      "\u001b[33mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\u001b[0m\u001b[33m\n",
+      "\u001b[0mNote: you may need to restart the kernel to use updated packages.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Install cifar10 dependencies\n",
+    "%cd pytorch-cifar10-multiweights\n",
+    "%pip install -r requirements.txt"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "64dfd766",
+   "metadata": {},
+   "source": [
+    "## Method 1: Default Hooks\n",
+    "\n",
+    "This is the conventional way of defining hooks for model loading and prediction, which uses the `hooks/load.py` and `hooks/predict.py` files."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "54d6ce74",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "MODEL_NAME = 'torch-cifar10-demo'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "a952b4e5",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2024-04-26 08:06:19 mlsteam-model-sdk [WARNING]: 'dev-c06cf915'\n",
+      "Generating dev mv record vuuid=dev-c06cf915...\n",
+      "Generating archive at /root/.mlsteam-model-sdk/models/download/dev-c06cf915.mlarchive...\n",
+      "Extracting archive at /root/.mlsteam-model-sdk/models/extract/dev-c06cf915...\n",
+      "Done.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create a model version under development\n",
+    "!mlsteam-model-cli dev mv add-local \\\n",
+    "    --model-name \"{MODEL_NAME}\" \\\n",
+    "    --version-name v1 \\\n",
+    "    --hooks-dir hooks \\\n",
+    "    --src-dir . \\\n",
+    "    --submodel main model \\\n",
+    "    --manifest manifest.json \\\n",
+    "    -X .ipynb_checkpoints"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "b7aab9a9",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "total 1  dev 1\n",
+      "\n",
+      "  muuid         model_name           vuuid       version_name     puuid     packaged   encrypted         download_time       \n",
+      "=============================================================================================================================\n",
+      "__local__   *torch-cifar10-demo   dev-c06cf915   *v1            __local__   True       False       2024-04-26T08:06:19.725841\n"
+     ]
+    }
+   ],
+   "source": [
+    "# The new model version should be listed here\n",
+    "!mlsteam-model-cli mv list-local"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "5ec6795b",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Load the model version\n",
+    "from mlsteam_model_sdk.sdk.model import Model\n",
+    "sdk_model = Model()\n",
+    "mv = sdk_model.load_model_version(model_name=MODEL_NAME, version_name='v1')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "0ad7c70f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "(tensor([2, 1, 8, 8]), ['bird', 'car', 'ship', 'ship'])\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Make prediction\n",
+    "import torch\n",
+    "ds = torch.load('dataset/samples/samples.pt')\n",
+    "print(mv.predict(ds['images']))\n",
+    "mv.close()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "dfeb3ab2",
+   "metadata": {},
+   "source": [
+    "## Method 2: Custom Hooks\n",
+    "\n",
+    "This method allows for specifying hook function defined in other places (E.g., `my_hooks.py` in this example), as long as the defining Python file is included in the source directory."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "fae86b14",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2024-04-26 08:06:22 mlsteam-model-sdk [WARNING]: 'dev-46674f24'\n",
+      "Generating dev mv record vuuid=dev-46674f24...\n",
+      "Generating archive at /root/.mlsteam-model-sdk/models/download/dev-46674f24.mlarchive...\n",
+      "Extracting archive at /root/.mlsteam-model-sdk/models/extract/dev-46674f24...\n",
+      "Done.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create a model version under development\n",
+    "!mlsteam-model-cli dev mv add-local \\\n",
+    "    --model-name \"{MODEL_NAME}\" \\\n",
+    "    --version-name v2 \\\n",
+    "    --hooks-dir \"\" \\\n",
+    "    --src-dir . \\\n",
+    "    --submodel main model \\\n",
+    "    --manifest manifest-custom-hooks.json \\\n",
+    "    -X hooks \\\n",
+    "    -X .ipynb_checkpoints"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "b2f9c75a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "(tensor([2, 1, 8, 8]), ['bird', 'car', 'ship', 'ship'])\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Load the model version and make prediction\n",
+    "# NOTE: non-default hooks requires specifying `service_name` explicitly\n",
+    "with sdk_model.load_model_version(model_name=MODEL_NAME, version_name='v2') as mv:\n",
+    "    print(mv.predict(service_name='classify', inputs=ds['images']))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8e3d244b",
+   "metadata": {},
+   "source": [
+    "## Method 3: Built-in Hooks\n",
+    "\n",
+    "This method allos for specifying hooks in manifest without writing hook files.\n",
+    "\n",
+    "Below it loads the model and make prediction on CPU. To run on GPU, modify the `device` property to `cuda` within `manifest-builtin-hooks.json`, and transfer the input tensor to GPU."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "afcbfb2f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2024-04-26 08:06:22 mlsteam-model-sdk [WARNING]: 'dev-22667e89'\n",
+      "Generating dev mv record vuuid=dev-22667e89...\n",
+      "Generating archive at /root/.mlsteam-model-sdk/models/download/dev-22667e89.mlarchive...\n",
+      "Extracting archive at /root/.mlsteam-model-sdk/models/extract/dev-22667e89...\n",
+      "Done.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create a model version under development\n",
+    "!mlsteam-model-cli dev mv add-local \\\n",
+    "    --model-name \"{MODEL_NAME}\" \\\n",
+    "    --version-name v3 \\\n",
+    "    --hooks-dir \"\" \\\n",
+    "    --src-dir . \\\n",
+    "    --submodel main model \\\n",
+    "    --manifest manifest-builtin-hooks.json \\\n",
+    "    -X hooks \\\n",
+    "    -X .ipynb_checkpoints"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "id": "71025a28",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'class_ids': tensor([2, 1, 8, 8]), 'probs': tensor([2.4466, 7.6294, 3.9962, 5.4334], grad_fn=<MaxBackward0>), 'class_names': ['bird', 'car', 'ship', 'ship']}\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Load the model version and make prediction\n",
+    "# NOTE: non-default hooks requires specifying `service_name` explicitly\n",
+    "with sdk_model.load_model_version(model_name=MODEL_NAME, version_name='v3') as mv:\n",
+    "    print(mv.predict(service_name='classify', inputs=ds['images']))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6b59164f",
+   "metadata": {},
+   "source": [
+    "## Simulate Model Encryption 🔐\n",
+    "\n",
+    "We can also simulate a model version packaged in encryption mode locally after everything works fine in plaintext mode."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "9b406c6c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Updating dev mv record vuud=dev-22667e89...\n",
+      "Generating archive at /root/.mlsteam-model-sdk/models/download/dev-22667e89-enc.mlarchive...\n",
+      "Extracting archive at /root/.mlsteam-model-sdk/models/extract/dev-22667e89...\n",
+      "Done.\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Convert a model version to simulated encryption mode\n",
+    "!mlsteam-model-cli dev mv update-local \\\n",
+    "    --model-name \"{MODEL_NAME}\" \\\n",
+    "    --version-name v3 \\\n",
+    "    --encrypted \\\n",
+    "    --sync"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "99e0a241",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "total 3  dev 3\n",
+      "\n",
+      "  muuid         model_name           vuuid       version_name     puuid     packaged   encrypted         download_time       \n",
+      "=============================================================================================================================\n",
+      "__local__   *torch-cifar10-demo   dev-c06cf915   *v1            __local__   True       False       2024-04-26T08:06:19.725841\n",
+      "__local__   *torch-cifar10-demo   dev-46674f24   *v2            __local__   True       False       2024-04-26T08:06:22.381246\n",
+      "__local__   *torch-cifar10-demo   dev-22667e89   *v3            __local__   True       True        2024-04-26T08:06:22.847044\n"
+     ]
+    }
+   ],
+   "source": [
+    "# List the model versions again\n",
+    "!mlsteam-model-cli mv list-local"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "ba65ac44",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{'class_ids': tensor([2, 1, 8, 8]), 'probs': tensor([2.4466, 7.6294, 3.9962, 5.4334], grad_fn=<MaxBackward0>), 'class_names': ['bird', 'car', 'ship', 'ship']}\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Load the model version and make prediction again\n",
+    "with sdk_model.load_model_version(model_name=MODEL_NAME, version_name='v3') as mv:\n",
+    "    print(mv.predict(service_name='classify', inputs=ds['images']))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "77b36f21",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
